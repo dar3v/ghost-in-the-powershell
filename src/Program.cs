@@ -1,2 +1,3 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+// TODO: @Zeki-Zek  add ur code here
+//                  also add other .cs files
