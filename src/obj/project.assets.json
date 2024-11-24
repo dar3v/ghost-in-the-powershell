@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/kuor/Projects/github/untitledconsolegame/ConsoleApp/ConsoleApp.csproj",
-      "projectName": "ConsoleApp",
-      "projectPath": "/home/kuor/Projects/github/untitledconsolegame/ConsoleApp/ConsoleApp.csproj",
+      "projectUniqueName": "/home/kuor/Projects/github/ghost-in-the-powershell/src/src.csproj",
+      "projectName": "src",
+      "projectPath": "/home/kuor/Projects/github/ghost-in-the-powershell/src/src.csproj",
       "packagesPath": "/home/kuor/.nuget/packages/",
-      "outputPath": "/home/kuor/Projects/github/untitledconsolegame/ConsoleApp/obj/",
+      "outputPath": "/home/kuor/Projects/github/ghost-in-the-powershell/src/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/kuor/.nuget/NuGet/NuGet.Config"
