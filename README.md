@@ -1,6 +1,11 @@
-# ghost-in-the-powershell 
+# ghost-in-the-powershell
 
-coming soon
+> [!NOTE]
+> still in early development !!
+> everything is still subject to change
 
 ## TODO!!
-- [ ] idk
+- [ ] initial game design
+    - [ ] core gameplay
+    - [ ] theme and atmosphere
+    - [ ] lore
