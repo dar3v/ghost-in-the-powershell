@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "IyyW7WgIpShkB1xlksWjDHfEDDa2vlgbKPoLq4LXMcmQCH7wz1JzhajsLq5OpcVutNx8CYVPSUHquSa0p3ENLw==",
+  "success": true,
+  "projectFilePath": "/home/kuor/Projects/github/untitledconsolegame/ConsoleApp/ConsoleApp.csproj",
+  "expectedPackageFiles": [
+    "/home/kuor/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}
