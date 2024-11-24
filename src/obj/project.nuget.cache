@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O8/h8O9027/NyqexaNvcCOjK96ot4QpuZFPLVq+DnGEbfAK64B+UKN+UlgSIvyBIqBlHP6tA5PmhjFunZViSSg==",
+  "dgSpecHash": "/8A9MWnBJ28=",
   "success": true,
-  "projectFilePath": "/home/kuor/Projects/github/ghost-in-the-powershell/src/src.csproj",
-  "expectedPackageFiles": [
-    "/home/kuor/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\lenovo\\Desktop\\ghost-in-the-powershell\\src\\src.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
