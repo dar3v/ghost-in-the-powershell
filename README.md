@@ -5,7 +5,22 @@
 >
 > everything is still subject to change.
 
-## TODO !!
+# Installation
+
+## from source
+first, make sure you have `git` installed in your system
+
+clone this repository.
+```
+git clone https://github.com/dar3v/ghost-in-the-powershell.git
+```
+
+navigate through the `src/` directory, then at the console, run:
+```
+dotnet run
+```
+
+## TODO
 - [ ] initial game design
     - [ ] core gameplay
     - [ ] theme and atmosphere
