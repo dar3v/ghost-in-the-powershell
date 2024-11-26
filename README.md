@@ -8,7 +8,7 @@
 # Installation
 
 ## from source
-first, make sure you have `git` installed in your system
+make sure you have `git` installed in your system
 
 clone this repository.
 ```
