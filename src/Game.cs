@@ -7,9 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
-
-
-
 namespace Ghost_in_The_PowerShell
 {
     internal class Game
@@ -43,7 +40,7 @@ namespace Ghost_in_The_PowerShell
 ▒██▒ ░  ░░ ████▓▒░░░██▒██▓ ░▒████▒░██▓ ▒██▒▒██████▒▒░▓█▒░██▓░▒████▒░██████▒░██████▒
 ▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  ░░ ▒░ ░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░
 ░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   
-░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░                                                                                                                                                                                                                                                                                      
+░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░
 
 Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
             string[] options = { "Play", "About", "Exit" };

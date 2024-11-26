@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
-
 namespace Ghost_in_The_PowerShell
 {
     internal class Menu
