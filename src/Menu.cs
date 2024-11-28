@@ -56,7 +56,7 @@ namespace Ghost_in_The_PowerShell
                 {
                     indexSelected--;
                     if (indexSelected == -1)
-                    {   
+                    {
                         indexSelected = Options.Length - 1;
                     }
                 }
@@ -68,7 +68,7 @@ namespace Ghost_in_The_PowerShell
                         indexSelected = 0;
                     }
                 }
-            } while ( keyPressed != ConsoleKey.Enter);
+            } while (keyPressed != ConsoleKey.Enter);
             return indexSelected;
         }
     }

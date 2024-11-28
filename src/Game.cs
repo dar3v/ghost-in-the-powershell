@@ -8,7 +8,7 @@ namespace Ghost_in_The_PowerShell
         private static Player bgPlayer;
 
         public void Start()
-        {   
+        {
             Title = "Ghost In The PowerShell";
             playMusic("./files/HomeMenubg.wav");
             runHomeMenu();
@@ -43,7 +43,8 @@ Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
             Menu homeMenu = new Menu(prompt, options);
             int indexSelected = homeMenu.Run();
 
-            switch (indexSelected) {
+            switch (indexSelected)
+            {
                 case 0:
                     playGame();
                     break;
@@ -55,7 +56,7 @@ Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
                     break;
 
             }
-            
+
         }
         private void playGame()
         {
@@ -81,7 +82,7 @@ Hello
         {
             Clear();
             Console.WriteLine("Are You Sure You Want To Exit? \nIf So, Press Enter Key To Escape Your Impending Doom!");
-            Console.ReadKey(); 
+            Console.ReadKey();
             bgPlayer.Stop();
             Environment.Exit(0);
         }
@@ -92,10 +93,10 @@ Hello
             Console.ReadKey(true);
 
         }
-        private static void playMusic(string filepath) 
+        private static void playMusic(string filepath)
         {
-             bgPlayer = new Player();
-             bgPlayer.Play(filepath);
+            bgPlayer = new Player();
+            bgPlayer.Play(filepath);
         }
     } // class bracket
 } //namespace bracket
