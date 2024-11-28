@@ -6,6 +6,7 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
+using NAudio.Wave;
 
 namespace Ghost_in_The_PowerShell
 {
@@ -96,9 +97,28 @@ Hello
         }
         public static void playMusic(string filepath) 
         {
-            SoundPlayer bgPlayer = new SoundPlayer(); //FIXME
-            bgPlayer.SoundLocation = filepath;
-            bgPlayer.Play();
+          //  SoundPlayer bgPlayer = new SoundPlayer(); //FIXME
+          //  bgPlayer.SoundLocation = filepath;
+          //  bgPlayer.Play();
+            try
+            {
+                using (var audioFile = new AudioFileReader(filepath))
+                using (var outputDevice = new WaveOutEvent())
+                {
+                    outputDevice.Init(audioFile);
+                    outputDevice.Play();
+                    // Wait for playback to finish
+                    while (outputDevice.PlaybackState == PlaybackState.Playing)
+                    {
+                        System.Threading.Thread.Sleep(100);
+                    }
+                }
+                Console.WriteLine("Playback finished.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while playing the audio: {ex.Message}");
+            }
         }
     }
 }
