@@ -21,7 +21,6 @@
 
 </details>
 
----
 ## TODO
 - [ ] initial game design
     - [ ] core gameplay
