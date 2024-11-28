@@ -5,12 +5,11 @@
 >
 > everything is still subject to change.
 
-# Installation
+## Installation
 
 <details>
 <summary><b>Windows</b></summary>
 
-    ---
   ⚠️ UNDER CONSTRUCTION ⚠️
 
 </details>
@@ -18,11 +17,11 @@
 <details>
 <summary><b>Linux</b></summary>
 
-    ---
   ⚠️ UNDER CONSTRUCTION ⚠️
 
 </details>
 
+---
 ## TODO
 - [ ] initial game design
     - [ ] core gameplay
