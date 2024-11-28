@@ -11,10 +11,7 @@
 <summary><b>Windows</b></summary>
 
     ---
-
   ⚠️ UNDER CONSTRUCTION ⚠️
-
-    ---
 
 </details>
 
@@ -22,10 +19,7 @@
 <summary><b>Linux</b></summary>
 
     ---
-
   ⚠️ UNDER CONSTRUCTION ⚠️
-
-    ---
 
 </details>
 
