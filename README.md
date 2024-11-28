@@ -1,4 +1,4 @@
-# GHOST in the POWERSHELL
+<h1 align=center>GHOST in the POWERSHELL</h1>
 
 > [!NOTE]
 > still in VERY very early development !!
@@ -7,18 +7,15 @@
 
 # Installation
 
-## from source
-make sure you have `git` installed in your system
-
-clone this repository.
-```
-git clone https://github.com/dar3v/ghost-in-the-powershell.git
-```
-
-navigate through the `src/` directory, then at the console, run:
-```
-dotnet run
-```
+<details>
+<summary><b>Windows</b></summary>
+    ---
+  ⚠️ UNDER CONSTRUCTION ⚠️
+</details>
+<details>
+<summary><b>Linux</b></summary>
+    ---
+</details>
 
 ## TODO
 - [ ] initial game design
