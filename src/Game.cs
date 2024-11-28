@@ -6,16 +6,18 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
-using NAudio.Wave;
+using NetCoreAudio;
 
 namespace Ghost_in_The_PowerShell
 {
     internal class Game
     {
+        private static Player bgPlayer;
+
         public void Start()
         {   
             Title = "Ghost In The PowerShell";
-            playMusic("HomeMenubg.wav");
+            playMusic("./HomeMenubg.wav");
             runHomeMenu();
 
 
@@ -87,38 +89,20 @@ Hello
             Clear();
             Console.WriteLine("Are You Sure You Want To Exit? \nIf So, Press Enter Key To Escape Your Impending Doom!");
             Console.ReadKey(); 
+            bgPlayer.Stop();
             Environment.Exit(0);
         }
+
         private void bgSounds()
         {
             playMusic("HomeMenubg.wav");
             Console.ReadKey(true);
 
         }
-        public static void playMusic(string filepath) 
+        private static void playMusic(string filepath) 
         {
-          //  SoundPlayer bgPlayer = new SoundPlayer(); //FIXME
-          //  bgPlayer.SoundLocation = filepath;
-          //  bgPlayer.Play();
-            try
-            {
-                using (var audioFile = new AudioFileReader(filepath))
-                using (var outputDevice = new WaveOutEvent())
-                {
-                    outputDevice.Init(audioFile);
-                    outputDevice.Play();
-                    // Wait for playback to finish
-                    while (outputDevice.PlaybackState == PlaybackState.Playing)
-                    {
-                        System.Threading.Thread.Sleep(100);
-                    }
-                }
-                Console.WriteLine("Playback finished.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred while playing the audio: {ex.Message}");
-            }
+             bgPlayer = new Player();
+             bgPlayer.Play(filepath);
         }
-    }
-}
+    } // class bracket
+} //namespace bracket
