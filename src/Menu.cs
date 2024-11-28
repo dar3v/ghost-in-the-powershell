@@ -13,7 +13,6 @@ namespace Ghost_in_The_PowerShell
             indexSelected = 0;
             Options = options;
             Prompt = prompt;
-
         }
         private void optionDisplay()
         {
@@ -35,7 +34,6 @@ namespace Ghost_in_The_PowerShell
                     ForegroundColor = ConsoleColor.White;
                     BackgroundColor = ConsoleColor.Black;
                 }
-
                 Console.WriteLine($"{selectSymbol}[  {currentOption}  ]");
             }
             ResetColor();
