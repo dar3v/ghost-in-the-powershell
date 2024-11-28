@@ -10,7 +10,7 @@ namespace Ghost_in_The_PowerShell
         public void Start()
         {   
             Title = "Ghost In The PowerShell";
-            playMusic("./HomeMenubg.wav");
+            playMusic("./files/HomeMenubg.wav");
             runHomeMenu();
 
 
@@ -88,7 +88,7 @@ Hello
 
         private void bgSounds()
         {
-            playMusic("HomeMenubg.wav");
+            playMusic("./files/HomeMenubg.wav");
             Console.ReadKey(true);
 
         }
