@@ -59,8 +59,8 @@ Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
         private void playGame()
         {
             Clear();
-            WriteLine("Development in progress.."); // TODO: add playGame logic here
-            Console.ReadKey();
+            Engine mEngine = new Engine();
+            mEngine.Start();
             runHomeMenu();
         }
 
