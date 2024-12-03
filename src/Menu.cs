@@ -17,25 +17,51 @@ namespace Ghost_in_The_PowerShell
 
         private void optionDisplay()
         {
-            WriteLine(Prompt);
+            // for centering the instruct variable
+            int consoleWidth = Console.WindowWidth;
+            int promptPadding = Console.WindowHeight;
+            
+            string instruct = "Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select.";
+            int instuctLength = instruct.Length;
+
+            // Calculate padding for centering the instruction text
+            int padding = (consoleWidth - instruct.Length) / 2;
+            
+            // Write a new line padded with spaces to center the prompt 
+            System.Console.WriteLine(new string (' ', promptPadding) + Prompt);
+            WriteLine("\n");
+            System.Console.WriteLine(instruct.PadLeft(padding + instruct.Length));
+            System.Console.WriteLine("\n");
+
             for (int i = 0; i < Options.Length; i++)
             {
                 string currentOption = Options[i];
                 string selectSymbol = "";
+                string selectSymbol2 = "";
+
 
                 if (i == indexSelected)
                 {
                     selectSymbol = ">>";
-                    ForegroundColor = ConsoleColor.Black;
-                    BackgroundColor = ConsoleColor.White;
+                    selectSymbol2 = "<<";
+                    ForegroundColor = ConsoleColor.Red;
+                    
                 }
                 else
                 {
                     selectSymbol = " ";
                     ForegroundColor = ConsoleColor.White;
-                    BackgroundColor = ConsoleColor.Black;
+                    
                 }
-                Console.WriteLine($"{selectSymbol}[  {currentOption}  ]");
+
+                string optionText = $"{selectSymbol} {currentOption} {selectSymbol2}";
+                
+                // Calculate padding for centering the option text
+                int optionPadding = Math.Max((consoleWidth - optionText.Length) / 2, 0);
+
+                //print centered option 
+                System.Console.WriteLine(new string (' ', optionPadding) + optionText);
+                // Console.WriteLine($"{selectSymbol}[  {currentOption}  ]");
             }
             ResetColor();
         }

@@ -37,8 +37,8 @@ namespace Ghost_in_The_PowerShell
 ░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   
 ░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░
 
-Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
-            string[] options = { "Play", "About", "Exit" };
+";
+            string[] options = { "Play", " About", "Exit" };
             Menu homeMenu = new Menu(prompt, options);
             int indexSelected = homeMenu.Run();
 
@@ -67,8 +67,7 @@ Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
         private void aboutGame()
         {
             Clear();
-            WriteLine("Development in progress.."); //TODO: add aboutGame logic here
-            ReadKey();
+            keyboardPrint("Development in progress.."); //TODO: add aboutGame logic here
             ReadKey(true);
             runHomeMenu();
         }
@@ -89,6 +88,15 @@ Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select";
         {
             bgPlayer = new Player();
             bgPlayer.Play(filepath);
+        }
+
+        public static void keyboardPrint(string text, int speed = 40) //A method for the keyboard typing effect
+        {
+            foreach (char c in text)
+            {
+                Console.Write(c);
+                Thread.Sleep(speed);
+            }
         }
     } // class bracket
 } //namespace bracket
