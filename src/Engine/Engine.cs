@@ -1,7 +1,9 @@
 using System.Diagnostics;
 using System.Text;
 
+//
 // TODO: MODULARIZE THIS
+//
 
 namespace Ghost_in_The_PowerShell
 {
@@ -51,6 +53,7 @@ namespace Ghost_in_The_PowerShell
             Stopwatch stopwatch = new Stopwatch();
             char[,] screen = new char[nScreenWidth, nScreenHeight];
 
+            // TODO: rewrite this bit idk
             Console.WriteLine(@"
                 (under development)
 
@@ -90,22 +93,22 @@ namespace Ghost_in_The_PowerShell
 
                     if (bUp && !bDown)
                     {
-                        fPlayerX += MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
-                        fPlayerY += MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                        fPlayerX += MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                        fPlayerY += MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
                         if (map[(int)fPlayerY][(int)fPlayerX] is '#')
                         {
-                            fPlayerX -= MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
-                            fPlayerY -= MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                            fPlayerX -= MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                            fPlayerY -= MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
                         }
                     }
                     if (bDown && !bUp)
                     {
-                        fPlayerX -= MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
-                        fPlayerY -= MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                        fPlayerX -= MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                        fPlayerY -= MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
                         if (map[(int)fPlayerY][(int)fPlayerX] is '#')
                         {
-                            fPlayerX += MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
-                            fPlayerY += MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                            fPlayerX += MathF.Sin(fPlayerA) * fSpeed * fElapsedTime;
+                            fPlayerY += MathF.Cos(fPlayerA) * fSpeed * fElapsedTime;
                         }
                     }
                     if (bLeft && !bRight)
@@ -133,6 +136,7 @@ namespace Ghost_in_The_PowerShell
 
                         float fDistanceToWall = 0;
                         bool bHitWall = false;
+                        bool bBoundary = false;
 
                         float fEyeX = MathF.Sin(fRayAngle); // Unit vector for ray in player space
                         float fEyeY = MathF.Cos(fRayAngle);
@@ -157,6 +161,22 @@ namespace Ghost_in_The_PowerShell
                                 if (map[nTestY][nTestX] == '#')
                                 {
                                     bHitWall = true;
+                                    List<(float, float)> p = new();
+                                    for (int tx = 0; tx < 2; tx++)
+                                    {
+                                        for (int ty = 0; ty < 2; ty++)
+                                        {
+                                            float vy = (float)nTestY + ty - fPlayerY;
+                                            float vx = (float)nTestX + tx - fPlayerX;
+                                            float d = MathF.Sqrt(vx * vx + vy * vy);
+                                            float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
+                                            p.Add((d, dot));
+                                        }
+                                    }
+                                    p.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+                                    float fBound = 0.01f;
+                                    if (MathF.Acos(p[0].Item2) < fBound) bBoundary = true;
+                                    if (MathF.Acos(p[1].Item2) < fBound) bBoundary = true;
                                 }
                             }
                         }
@@ -173,6 +193,8 @@ namespace Ghost_in_The_PowerShell
                         else if (fDistanceToWall < fDepth) nShade = '░';
                         else nShade = ' '; // farthest
 
+                        if (bBoundary) nShade = ' ';
+
                         for (int y = 0; y < nScreenHeight; y++)
                         {
                             if (y <= nCeiling)
@@ -180,11 +202,19 @@ namespace Ghost_in_The_PowerShell
                             else if (y > nCeiling && y <= nFloor)
                                 screen[x, y] = nShade;
                             else
-                                screen[x, y] = ' ';
+                            {
+                                float b = 1.0f - ((float)y - nScreenHeight / 2.0f) / ((float)nScreenHeight / 2.0f);
+                                if (b < 0.25) nShade = '#';
+                                else if (b < .5) nShade = 'x';
+                                else if (b < .75) nShade = '.';
+                                else if (b < .9) nShade = '-';
+                                else nShade = ' ';
+                                screen[x, y] = nShade;
+                            }
                         }
                     }
 
-                    // write the screen[] with StringBuilder
+                    // write frame
                     StringBuilder render = new();
                     for (int y = 0; y < screen.GetLength(1); y++)
                     {
