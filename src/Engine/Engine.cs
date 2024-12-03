@@ -29,8 +29,10 @@ namespace Ghost_in_The_PowerShell
         "################",
             ];
         // Console must be atleast this big
-        int nScreenWidth = 120;
-        int nScreenHeight = 40;
+        int nScreenWidth = Console.WindowWidth; //changed the nScreenWidth and nScreenHeight variable
+        int nScreenHeight = Console.WindowHeight;
+        // int nScreenWidth = 120;
+        // int nScreenHeight = 40;
 
         // player position, as well as angle player is looking at
         float fPlayerX = 3.0f;
