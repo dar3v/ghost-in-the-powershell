@@ -1,9 +1,11 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
 
-> [!NOTE]
-> still in VERY very early development !!
->
-> everything is still subject to change.
+# About
+GHOST in the POWERSHELL is a 3D Maze Game where you idk yes
+
+the game will have 3 or 4 levels, progressively getting more difficult
+
+finish the maze before the ghost gets you!!!! 👻
 
 ## Installation
 
@@ -22,10 +24,13 @@
 </details>
 
 ## TODO
-- [ ] initial game design
-    - [ ] core gameplay
-    - [ ] theme and atmosphere
-    - [ ] lore
+- [x] initial game design
+- [ ] core gameplay
 - [ ] start documentation
     - [ ] game design
     - [ ] how to play
+
+# Credits 🎉
+- [javidx9](https://www.youtube.com/@javidx9)
+    - the original 3D Game made on C++ was from him ([github link](https://github.com/OneLoneCoder/CommandLineFPS))
+    - he also had a yt video about the engine [youtube video](https://www.youtube.com/watch?v=xW8skO7MFYw)
