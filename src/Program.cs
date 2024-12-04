@@ -1,9 +1,12 @@
+using static System.Console;
+
 namespace Ghost_in_The_PowerShell
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Clear();
             loadingBar();
             Game mygame = new Game();
             mygame.Start();
