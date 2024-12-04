@@ -58,9 +58,8 @@ namespace Ghost_in_The_PowerShell
 
         private void playGame()
         {
-            Clear();
-            Engine mEngine = new Engine();
-            mEngine.Start();
+            Engine Engine = new Engine();
+            Engine.E_Start();
             runHomeMenu();
         }
 
@@ -81,6 +80,7 @@ namespace Ghost_in_The_PowerShell
             Console.ReadKey();
             if (bgPlayer != null)
                 bgPlayer.Stop();
+            Console.CursorVisible = true;
             Environment.Exit(0);
         }
 
