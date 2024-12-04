@@ -30,7 +30,8 @@ finish the maze before the ghost gets you!!!! 👻
     - [ ] game design
     - [ ] how to play
 
-# Credits 🎉
+## Credits 🎉
 - [javidx9](https://www.youtube.com/@javidx9)
     - the original 3D Game made on C++ was from him ([github link](https://github.com/OneLoneCoder/CommandLineFPS))
     - he also had a yt video about the engine [youtube video](https://www.youtube.com/watch?v=xW8skO7MFYw)
+- [NetCoreAudio](https://github.com/mobiletechtracker/NetCoreAudio) for the cross-platform audio library
