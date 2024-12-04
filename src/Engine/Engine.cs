@@ -1,11 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-//
-// TODO: MODULARIZE THIS
-//
-
-namespace Ghost_in_The_PowerShell
+namespace FPSEngine3D
 {
     internal class Engine
     {
@@ -57,7 +53,7 @@ namespace Ghost_in_The_PowerShell
                             (y/N)
                             ";
 
-        public void E_Start()
+        public void Start()
         {
             Console.Clear();
             Console.WriteLine(

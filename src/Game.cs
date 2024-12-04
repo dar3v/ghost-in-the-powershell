@@ -1,4 +1,5 @@
 using NetCoreAudio;
+using FPSEngine3D;
 using static System.Console;
 
 namespace Ghost_in_The_PowerShell
@@ -58,8 +59,8 @@ namespace Ghost_in_The_PowerShell
 
         private void playGame()
         {
-            Engine Engine = new Engine();
-            Engine.E_Start();
+            Engine Engine = new();
+            Engine.Start();
             runHomeMenu();
         }
 
