@@ -75,26 +75,19 @@ namespace Ghost_in_The_PowerShell
         private void exitGame()
         {
             Clear();
-            Console.WriteLine(
+            WriteLine(
                 "Are You Sure You Want To Exit? \nIf So, Press Enter Key To Escape Your Impending Doom!"
             );
 
             ConsoleKeyInfo exitGame = Console.ReadKey(true);
 
-            if (exitGame.Key == ConsoleKey.Enter) 
+            if (exitGame.Key == ConsoleKey.Enter)
             {
+                if (bgPlayer != null) bgPlayer.Stop();
+                Console.CursorVisible = true;
                 Environment.Exit(0);
             }
-            else 
-            {
-                runHomeMenu();
-            }
-
-            Console.ReadKey();
-            if (bgPlayer != null)
-                bgPlayer.Stop();
-            Console.CursorVisible = true;
-            Environment.Exit(0);
+            else runHomeMenu();
         }
 
         private static void playMusic(string filepath)
