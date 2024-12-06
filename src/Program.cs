@@ -8,7 +8,7 @@ namespace Ghost_in_The_PowerShell
         {
             Clear();
             loadingBar();
-            Game mygame = new Game();
+            Game mygame = new Game(); 
             mygame.Start();
         }
 

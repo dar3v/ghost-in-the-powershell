@@ -1,5 +1,6 @@
-using System.Diagnostics;
+    using System.Diagnostics;
 using System.Text;
+using Ghost_in_The_PowerShell;
 
 namespace FPSEngine3D
 {
@@ -46,29 +47,30 @@ namespace FPSEngine3D
 
         bool bBackToMenu = false;
 
-        string sConfirmQuit = @"
-                            Are you sure you want
-                            to return to menu?
-
-                            (y/N)
-                            ";
+        string sConfirmQuit = "Are You Sure You Want To Return To Menu?";
+        string sConfirmQuit0 = "Press Y to Continue, N if otherwise.";
+        string sConfirmQuit1 = "(y/N)";
 
         public void Start()
         {
+            int consoleHeight = Console.WindowHeight;
+            int currentRow = consoleHeight / 2 - 4;
             Console.Clear();
-            Console.WriteLine(
-              @"
-              Level 00: Base Engine (Testing)
-
-              Controls:
-                - WASD to move/look
-                - Esc to return to Menu
+           
+            Game.centeredText("Level 00: Base Engine (Testing)", ref currentRow);
+            Game.centeredText("\n", ref currentRow);
+            Game.centeredText("Controls:", ref currentRow);
+            Game.centeredText("\n", ref currentRow);
+            Game.centeredText("- WASD to move/look", ref currentRow);
+            Game.centeredText("- Esc to return to Menu", ref currentRow);
+            Game.centeredText("\n", ref currentRow);
+            Game.centeredText("Press Any Key to Begin", ref currentRow);
+            Game.centeredText("Press \"Esc\" to Return to Menu", ref currentRow);
               
-              press any key to begin
-              press Esc to return to Menu
-              ");
 
             if (Console.ReadKey().Key is not ConsoleKey.Escape)
+            {
+                Game.G_playGameMusic("./files/GameMusic.Wav");
                 while (true)
                 {
                     E_Navi();
@@ -76,11 +78,14 @@ namespace FPSEngine3D
 
                     if (bBackToMenu) break;
                 }
+            }
             return;
         }
 
         private void E_Navi()
         {
+            int consoleHeight = Console.WindowHeight;
+            int currentRow = consoleHeight / 2 - 4;
             // internal clock for consistent framerate
             float fElapsedTime = (float)stopwatch.Elapsed.TotalSeconds;
             stopwatch = Stopwatch.StartNew();
@@ -104,8 +109,18 @@ namespace FPSEngine3D
                         break;
                     case ConsoleKey.Escape:
                         Console.Clear();
-                        Console.WriteLine(sConfirmQuit);
-                        if (Console.ReadKey(true).Key is ConsoleKey.Y) bBackToMenu = true;
+                        Game.centeredText(sConfirmQuit, ref currentRow);
+                        Game.centeredText("\n", ref currentRow);
+                        Game.centeredText(sConfirmQuit0, ref currentRow);
+                        Game.centeredText(sConfirmQuit1, ref currentRow);
+                        ConsoleKeyInfo exitGame = Console.ReadKey(true);
+                        if (exitGame.Key == ConsoleKey.Y) 
+                        {
+                            Game.G_playHomeMusic("./files/HomeMenubg.wav");
+                            bBackToMenu = true;
+                        }
+
+                        // if (Console.ReadKey(true).Key = ConsoleKey.Y)  bBackToMenu = true;
                         else continue;
                         break;
                 }
@@ -205,7 +220,8 @@ namespace FPSEngine3D
                 int nFloor = nScreenHeight - nCeiling;
 
                 char nShade = ' ';
-
+                // Console.BackgroundColor = ConsoleColor.DarkGray;
+                // Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (fDistanceToWall <= fDepth / 4.0f) nShade = '█'; // nearest
                 else if (fDistanceToWall < fDepth / 3.0f) nShade = '▓';
                 else if (fDistanceToWall < fDepth / 2.0f) nShade = '▒';
