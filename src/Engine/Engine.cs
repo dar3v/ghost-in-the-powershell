@@ -39,6 +39,8 @@ namespace FPSEngine3D
         // player speed
         float fSpeed = 70.0f;
         float fRotationSpeed = 1.25f;
+        // float fSpeed = 8.0f;
+        // float fRotationSpeed = 0.35f;
         Stopwatch stopwatch = new Stopwatch();
 
         // player FOV vars for depth calculations
@@ -109,6 +111,7 @@ namespace FPSEngine3D
                         break;
                     case ConsoleKey.Escape:
                         Console.Clear();
+                        Console.ResetColor();
                         Game.centeredText(sConfirmQuit, ref currentRow);
                         Game.centeredText("\n", ref currentRow);
                         Game.centeredText(sConfirmQuit0, ref currentRow);
@@ -221,7 +224,7 @@ namespace FPSEngine3D
 
                 char nShade = ' ';
                 // Console.BackgroundColor = ConsoleColor.DarkGray;
-                // Console.ForegroundColor = ConsoleColor.DarkGreen;
+                //Console.ForegroundColor = ConsoleColor.DarkGreen;
                 if (fDistanceToWall <= fDepth / 4.0f) nShade = '█'; // nearest
                 else if (fDistanceToWall < fDepth / 3.0f) nShade = '▓';
                 else if (fDistanceToWall < fDepth / 2.0f) nShade = '▒';

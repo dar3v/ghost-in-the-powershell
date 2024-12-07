@@ -22,7 +22,7 @@ namespace Ghost_in_The_PowerShell
             int promptPadding = Console.WindowHeight;
             
             string instruct = "Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select.";
-            int instuctLength = instruct.Length;
+            
 
             // Calculate padding for centering the instruction text
             int padding = (consoleWidth - instruct.Length) / 2;
@@ -57,10 +57,11 @@ namespace Ghost_in_The_PowerShell
                 string optionText = $"{selectSymbol} {currentOption} {selectSymbol2}";
                 
                 // Calculate padding for centering the option text
-                int optionPadding = Math.Max((consoleWidth - optionText.Length) / 2, 0);
-
+                int optionPaddingWidth = Math.Max((consoleWidth - optionText.Length) / 2, 0);
+                
+                
                 //print centered option 
-                System.Console.WriteLine(new string (' ', optionPadding) + optionText);
+                System.Console.WriteLine(new string (' ', optionPaddingWidth) + optionText);
                 // Console.WriteLine($"{selectSymbol}[  {currentOption}  ]");
             }
             ResetColor();
