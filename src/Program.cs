@@ -6,15 +6,17 @@ namespace Ghost_in_The_PowerShell
     {
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
+
             Clear();
             Game mygame = new Game();
             mygame.Start();
+
+            Console.CursorVisible = true;
         }
 
         static void loadingBar() //added a loading in the start of the game
         {
-            Console.CursorVisible = false;
-
             //setting the dimension of the console window
             int consoleWidth = Console.WindowWidth;
             int consoleHeight = Console.WindowHeight;
