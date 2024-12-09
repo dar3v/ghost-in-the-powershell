@@ -1,5 +1,5 @@
 using NetCoreAudio;
-using FPSEngine3D;
+using RaycasterCS;
 using static System.Console;
 
 namespace Ghost_in_The_PowerShell
@@ -8,7 +8,6 @@ namespace Ghost_in_The_PowerShell
     {
         private static Player? bgPlayer;
         public static Player? gameBgPlayer;
-
 
         public void Start()
         {
@@ -114,7 +113,8 @@ namespace Ghost_in_The_PowerShell
 
             if (terminateProgram.Key == ConsoleKey.Enter) 
             {
-                Environment.Exit(0);
+              if (bgPlayer != null) bgPlayer.Stop(); // assure that bgPlayer doesnt continue to run across systems
+              return;
             }
             else 
             {

@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Ghost_in_The_PowerShell;
+using Ghost_in_The_PowerShell; // NOTE: use a different namespace for public methods
 using System.Text;
 
 namespace RaycasterCS
@@ -11,6 +11,8 @@ namespace RaycasterCS
      *    - player position & angle
      *  this is then passed to the Engine class
      *  and it will then Render it to the console buffer
+     *
+     *  TODO: make variables here assignable from another class
      */
     public static class InitGame
     {
@@ -66,10 +68,14 @@ namespace RaycasterCS
         float fSpeed = 125.0f;
         float fRotationSpeed = 1.25f;
 
-        string[] sConfirmQuit = {
-          "Are You Sure You Want to Return to Menu?\n",
-          "Press Y to Continue, N if otherwise.\n",
-          "(Y/N)"
+        string[] sLevelInfo = {
+          "Level 00: Base Engine (Testing)",
+          "Controls:",
+          "- WASD to move/look",
+          "- Esc to return to Menu",
+          " ",
+          "Press Any Key to Begin",
+          "Press \"Esc\" to Return to Menu",
         };
 
         internal void Start()
@@ -93,26 +99,16 @@ namespace RaycasterCS
             bool bDisplayCoords = true;
             bool bConsoleLargeEnough = true;
 
-            string[] sLevelInfo = {
-                "Level 00: Base Engine (Testing)",
-                "Controls:\n",
-                "- WASD to move/look",
-                "- Esc to return to Menu\n",
-                "Press Any Key to Begin",
-                "Press \"Esc\" to Return to Menu",
-                };
-
             Stopwatch stopwatch = new Stopwatch();
+
 
             // ---Start---
             Console.Clear();
+            int currentRow = Console.WindowHeight / 2;
 
+            // print sLevelInfo
             for (int i = 0; i < sLevelInfo.Length; i++)
-            {
-                int currentRow = Console.WindowHeight / 2;
                 Game.centeredText(sLevelInfo[i], ref currentRow);
-                currentRow++;
-            }
 
             if (Console.ReadKey(true).Key is not ConsoleKey.Escape)
             {
@@ -150,12 +146,14 @@ namespace RaycasterCS
                             break;
                         case ConsoleKey.Escape: // pause
                             Console.Clear();
+                            string[] sConfirmQuit = {
+                            "Are You Sure You Want to Return to Menu?",
+                            " ",
+                            "Press Y to Continue, N if otherwise.",
+                            "(Y/N)"
+                            };
                             for (int i = 0; i < sConfirmQuit.Length; i++)
-                            {
-                                int h = Console.WindowHeight;
-                                int currentRow = h / 2;
                                 Game.centeredText(sConfirmQuit[i], ref currentRow);
-                            }
                             if (Console.ReadKey(true).Key == ConsoleKey.Y) bQuit = true;
                             break;
                     }
