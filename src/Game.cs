@@ -1,5 +1,5 @@
 using NetCoreAudio;
-using FPSEngine3D;
+using RaycasterCS;
 using static System.Console;
 
 namespace Ghost_in_The_PowerShell
@@ -8,7 +8,6 @@ namespace Ghost_in_The_PowerShell
     {
         private static Player? bgPlayer;
         public static Player? gameBgPlayer;
-
 
         public void Start()
         {
@@ -79,6 +78,7 @@ namespace Ghost_in_The_PowerShell
 
             int currentRow = consoleHeight / 2 - 4;
             // Print each string centered in the console
+            // NOTE: @Zeki-Zek pls make this cleaner (utilize loops and arrays)
             centeredText("\"ABOUT\"", ref currentRow);
             centeredText("\n", ref currentRow);
             centeredText("This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.", ref currentRow);
@@ -114,7 +114,8 @@ namespace Ghost_in_The_PowerShell
 
             if (terminateProgram.Key == ConsoleKey.Enter) 
             {
-                Environment.Exit(0);
+              if (bgPlayer != null) bgPlayer.Stop(); // assure that bgPlayer doesnt continue to run across systems
+              return;
             }
             else 
             {
