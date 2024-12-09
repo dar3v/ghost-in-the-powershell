@@ -322,7 +322,8 @@ namespace RaycasterCS
 
                     for (int y = 0; y < map.Length; y++)
                         for (int x = 0; x < map[y].Length; x++)
-                            screen[x, y] = map[y][x] == 'P' ? ' ' : map[y][x];
+                            screen[x, y] = map[y][x];
+
                     screen[(int)fPlayerX, (int)fPlayerY] = 'P';
                 }
 
