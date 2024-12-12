@@ -19,7 +19,7 @@ namespace Ghost_in_The_PowerShell
         {
             // for centering the instruct variable
             int consoleWidth = Console.WindowWidth;
-            int promptPadding = Console.WindowHeight;
+            int promptPadding = Console.WindowHeight; 
             
             string instruct = "Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select.";
             

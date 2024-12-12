@@ -7,13 +7,43 @@ namespace Ghost_in_The_PowerShell
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
-
             Clear();
+            loadingBar();
+            someethingLoading();
             Game mygame = new Game();
             mygame.Start();
 
             Console.CursorVisible = true;
         }
+        static void someethingLoading()
+{
+    //156 , 46
+    // Console.WriteLine(Console.WindowWidth);
+    // Console.WriteLine(Console.WindowHeight);
+    Console.CursorVisible = false;
+
+    int consoleWidth = Console.WindowWidth;
+    int consoleHeight = Console.WindowHeight;
+
+    for (int i = 0; i < consoleWidth; i++)
+    {
+        for (int j = 0; j < consoleHeight; j++)
+        {
+            if (j % 2 == 0)
+            {
+                Console.SetCursorPosition(i, j);
+                Console.Write('█');
+            }
+            else
+            {
+                Console.SetCursorPosition(consoleWidth - 1 - i, j);
+                Console.Write('█'); ;
+
+            }
+        }
+        Thread.Sleep(1);
+    }
+}
 
         static void loadingBar() //added a loading in the start of the game
         {
