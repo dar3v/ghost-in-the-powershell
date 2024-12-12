@@ -112,6 +112,7 @@ namespace RaycasterCS
 
             if (Console.ReadKey(true).Key is not ConsoleKey.Escape)
             {
+                Game.G_playGameMusic("./files/GameMusic.wav");
                 Console.Clear();
                 stopwatch = Stopwatch.StartNew();
                 while (true) // the game loop
@@ -154,8 +155,15 @@ namespace RaycasterCS
                             };
                             for (int i = 0; i < sConfirmQuit.Length; i++)
                                 Game.centeredText(sConfirmQuit[i], ref currentRow);
-                            if (Console.ReadKey(true).Key == ConsoleKey.Y) bQuit = true;
-                            break;
+                            if (Console.ReadKey(true).Key == ConsoleKey.Y) 
+                            {
+                                Game.G_playHomeMusic("./files/HomeMenubg.wav"); bQuit = true;
+                            }
+                            else 
+                            {
+                                bQuit = false;
+                            }
+                        break;
                     }
                 }
 
