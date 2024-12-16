@@ -1,14 +1,14 @@
 using static System.Console;
 
-namespace Ghost_in_The_PowerShell
+namespace Menu
 {
-    internal class Menu
+    internal class Menu_C
     {
         private int indexSelected;
         private string[] Options;
         private string Prompt;
 
-        public Menu(string prompt, string[] options)
+        public Menu_C(string prompt, string[] options)
         {
             indexSelected = 0;
             Options = options;
@@ -97,6 +97,38 @@ namespace Ghost_in_The_PowerShell
                 }
             } while (keyPressed != ConsoleKey.Enter);
             return indexSelected;
+        }
+    }
+}
+
+namespace WriteFunc
+{
+    internal class CWriteFunc 
+    {
+
+    public static void KeyboardPrint(string text, int speed = 40) //A method for the keyboard typing effect
+        {
+            foreach (char c in text)
+            {
+                Console.Write(c);
+                Thread.Sleep(speed);
+            }
+        }
+        public static void CenteredText(string text, ref int currentRow) 
+        { //METHOD FOR CENTERING TEXT (make sure to declare int <variable_name> = Console.WindowHeight;)
+          //and also declare a variable "int <name> = <variable_name above> / 2;  you can subtract it to change the height
+            {
+                int consoleWidth = Console.WindowWidth;
+                
+                int textLength = text.Length;
+                int paddingWidth = (consoleWidth - textLength) / 2;
+        
+                // Debugging: Print padding and text length to verify
+                //Console.WriteLine($"Text Length: {textLength}, Padding: {padding}");
+                Console.SetCursorPosition(paddingWidth, currentRow);
+                Console.WriteLine(text);
+                currentRow++;
+            }
         }
     }
 }
