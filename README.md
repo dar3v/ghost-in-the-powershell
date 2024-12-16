@@ -1,4 +1,8 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
+# Table of Contents
+- [About](#about)
+- [Installation](#installation)
+- [Credits](#credits-)
 
 # About
 GHOST in the POWERSHELL is a 3D Maze Game where you collect six pages in 5 levels in order to escape.
