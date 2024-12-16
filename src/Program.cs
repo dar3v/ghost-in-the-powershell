@@ -15,8 +15,7 @@ namespace Ghost_in_The_PowerShell
                 Clear();
                 loadingBar();
                 someethingLoading();
-                Program program = new();
-                program.Start();
+                Start();
 
                 Console.CursorVisible = true;
             }
@@ -80,7 +79,7 @@ namespace Ghost_in_The_PowerShell
 
                 }
             }
-            public void Start()
+            public static void Start()
             {
                 bgPlayer = new Player();
                 bgPlayer.Play(".files/HomeMenubg.wav");
@@ -88,7 +87,7 @@ namespace Ghost_in_The_PowerShell
                 runHomeMenu();
             }
 
-            private void runHomeMenu()
+            private static void runHomeMenu()
             {
                 Console.ResetColor();
                     string prompt =
@@ -134,14 +133,14 @@ namespace Ghost_in_The_PowerShell
                 }
             }
 
-            private void G_playGame()
+            private static void G_playGame()
             {
                 Engine Engine = new();
                 Engine.Start();
                 runHomeMenu();
             }
 
-            private void G_aboutGame() //TODO: Add Game Logic here
+            private static void G_aboutGame() 
             {
                 // int consoleWidth = Console.WindowWidth;
                 int consoleHeight = Console.WindowHeight;
@@ -170,7 +169,7 @@ namespace Ghost_in_The_PowerShell
                 runHomeMenu();  // Navigate back to the home menu (if needed)
             }
 
-            private void G_exitGame()
+            private static void G_exitGame()
             {
                 Clear();
 
