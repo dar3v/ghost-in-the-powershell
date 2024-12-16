@@ -4,12 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace RaycasterCS
 {
-    partial class User32
-    {
-        [DllImport("User32.dll")]
-        internal static extern short GetAsyncReadKeyState(int vKey);
-    }
-
     /*
      *  InitGame class
      *  This class gets initial values for
@@ -72,7 +66,7 @@ namespace RaycasterCS
         float fPlayerA = InitGame.initPlayerA;
 
         // player speed
-        float fSpeed = 125.0f;
+        float fSpeed = 50.0f;
         float fRotationSpeed = 1.25f;
 
         internal void Start()
@@ -98,7 +92,6 @@ namespace RaycasterCS
 
             Stopwatch stopwatch = new Stopwatch();
 
-
             // ---Start---
             Console.Clear();
             int currentRow = Console.WindowHeight / 2;
@@ -121,9 +114,28 @@ namespace RaycasterCS
 
             void Controls()
             {
+                // first, update console size if changed
+                if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
+                {
+                    Console.Clear();
+                    nConsoleWidth = Console.WindowWidth;
+                    nConsoleHeight = Console.WindowHeight;
+                }
+
+                // handle invalid console size
+                bConsoleLargeEnough = nConsoleWidth >= nScreenWidth && nConsoleHeight >= nScreenHeight;
+                if (!bConsoleLargeEnough) return;
+
                 bool bUp = false, bDown = false, bLeft = false, bRight = false;
 
-                if (OperatingSystem.IsLinux())
+                if (OperatingSystem.IsWindows())
+                {
+                    bUp = bUp || Win.GetAsyncReadKeyState('W') is not 0;
+                    bDown = bDown || Win.GetAsyncReadKeyState('S') is not 0;
+                    bLeft = bLeft || Win.GetAsyncReadKeyState('A') is not 0;
+                    bRight = bRight || Win.GetAsyncReadKeyState('D') is not 0;
+                }
+                else // for any other operating systems, do not use any OS APIs
                 {
                     while (Console.KeyAvailable)
                     {
@@ -147,25 +159,6 @@ namespace RaycasterCS
                         }
                     }
                 }
-                else if (OperatingSystem.IsWindows())
-                {
-                    bUp = bUp || User32.GetAsyncReadKeyState('W') != 0;
-                    bDown = bDown || User32.GetAsyncReadKeyState('S') != 0;
-                    bLeft = bLeft || User32.GetAsyncReadKeyState('A') != 0;
-                    bRight = bRight || User32.GetAsyncReadKeyState('D') != 0;
-                }
-                // update console size if changed
-                if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
-                {
-                    Console.Clear();
-                    nConsoleWidth = Console.WindowWidth;
-                    nConsoleHeight = Console.WindowHeight;
-                }
-
-                // handle invalid console size
-                bConsoleLargeEnough = nConsoleWidth >= nScreenWidth && nConsoleHeight >= nScreenHeight;
-                if (!bConsoleLargeEnough) return;
-
                 // ties movement to ingame time
                 float fIngameTime = (float)stopwatch.Elapsed.TotalSeconds;
                 stopwatch.Restart();
@@ -339,5 +332,10 @@ namespace RaycasterCS
                 Console.Write(render);
             }
         } // RaycasterCS.Engine.Start() method
+        partial class Win
+        {
+            [DllImport("User32.dll")]
+            internal static extern short GetAsyncReadKeyState(int vKey);
+        }
     } // RaycasterCS.Engine() object 
 } // RaycasterCS namespace
