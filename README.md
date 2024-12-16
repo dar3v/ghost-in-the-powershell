@@ -3,7 +3,7 @@
 # About
 GHOST in the POWERSHELL is a 3D Maze Game where you collect six pages in 5 levels in order to escape.
 
-finish the maze within the alotted time or the ghost will catch you! 👻
+finish the maze within the alotted time or the ghost will catch you! 
 
 ## Installation
 
