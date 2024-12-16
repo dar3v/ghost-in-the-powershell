@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Ghost_in_The_PowerShell; // NOTE: use a different namespace for public methods
 using System.Text;
 
 namespace RaycasterCS
@@ -68,16 +67,6 @@ namespace RaycasterCS
         float fSpeed = 125.0f;
         float fRotationSpeed = 1.25f;
 
-        string[] sLevelInfo = {
-          "Level 00: Base Engine (Testing)",
-          "Controls:",
-          "- WASD to move/look",
-          "- Esc to return to Menu",
-          " ",
-          "Press Any Key to Begin",
-          "Press \"Esc\" to Return to Menu",
-        };
-
         internal void Start()
         {
             // --initiallize variables---
@@ -106,15 +95,11 @@ namespace RaycasterCS
             Console.Clear();
             int currentRow = Console.WindowHeight / 2;
 
-            // print sLevelInfo
-            for (int i = 0; i < sLevelInfo.Length; i++)
-                Game.centeredText(sLevelInfo[i], ref currentRow);
-
             if (Console.ReadKey(true).Key is not ConsoleKey.Escape)
             {
-                Game.G_playGameMusic("./files/GameMusic.wav");
                 Console.Clear();
                 stopwatch = Stopwatch.StartNew();
+
                 while (true) // the game loop
                 {
                     Controls();
@@ -146,24 +131,8 @@ namespace RaycasterCS
                             bRight = true;
                             break;
                         case ConsoleKey.Escape: // pause
-                            Console.Clear();
-                            string[] sConfirmQuit = {
-                            "Are You Sure You Want to Return to Menu?",
-                            " ",
-                            "Press Y to Continue, N if otherwise.",
-                            "(Y/N)"
-                            };
-                            for (int i = 0; i < sConfirmQuit.Length; i++)
-                                Game.centeredText(sConfirmQuit[i], ref currentRow);
-                            if (Console.ReadKey(true).Key == ConsoleKey.Y) 
-                            {
-                                Game.G_playHomeMusic("./files/HomeMenubg.wav"); bQuit = true;
-                            }
-                            else 
-                            {
-                                bQuit = false;
-                            }
-                        break;
+                            bQuit = true;
+                            break;
                     }
                 }
 
@@ -268,7 +237,6 @@ namespace RaycasterCS
                                 bHitWall = true;
                                 List<(float, float)> p = new();
                                 for (int tx = 0; tx < 2; tx++)
-                                {
                                     for (int ty = 0; ty < 2; ty++)
                                     {
                                         float vy = (float)nTestY + ty - fPlayerY;
@@ -277,7 +245,6 @@ namespace RaycasterCS
                                         float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
                                         p.Add((d, dot));
                                     }
-                                }
                                 p.Sort((a, b) => a.Item1.CompareTo(b.Item1));
                                 float fBound = 0.01f;
                                 if (MathF.Acos(p[0].Item2) < fBound) bBoundary = true;
