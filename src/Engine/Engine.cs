@@ -149,10 +149,10 @@ namespace RaycasterCS
                 }
                 else if (OperatingSystem.IsWindows())
                 {
-                    bUp = bUp | User32.GetAsyncReadKeyState('W') != 0;
-                    bDown = bDown | User32.GetAsyncReadKeyState('S') != 0;
-                    bLeft = bLeft | User32.GetAsyncReadKeyState('A') != 0;
-                    bRight = bRight | User32.GetAsyncReadKeyState('D') != 0;
+                    bUp = bUp || User32.GetAsyncReadKeyState('W') != 0;
+                    bDown = bDown || User32.GetAsyncReadKeyState('S') != 0;
+                    bLeft = bLeft || User32.GetAsyncReadKeyState('A') != 0;
+                    bRight = bRight || User32.GetAsyncReadKeyState('D') != 0;
                 }
                 // update console size if changed
                 if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
