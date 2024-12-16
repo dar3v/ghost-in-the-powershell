@@ -1,8 +1,15 @@
 using System.Diagnostics;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace RaycasterCS
 {
+    partial class User32
+    {
+        [DllImport("User32.dll")]
+        internal static extern short GetAsyncReadKeyState(int vKey);
+    }
+
     /*
      *  InitGame class
      *  This class gets initial values for
@@ -13,6 +20,7 @@ namespace RaycasterCS
      *
      *  TODO: make variables here assignable from another class
      */
+
     public static class InitGame
     {
         public static int initMapHeight = 16;
@@ -114,28 +122,38 @@ namespace RaycasterCS
             void Controls()
             {
                 bool bUp = false, bDown = false, bLeft = false, bRight = false;
-                while (Console.KeyAvailable)
+
+                if (OperatingSystem.IsLinux())
                 {
-                    switch (Console.ReadKey(true).Key)
+                    while (Console.KeyAvailable)
                     {
-                        case ConsoleKey.W: // forward
-                            bUp = true;
-                            break;
-                        case ConsoleKey.S: // backward
-                            bDown = true;
-                            break;
-                        case ConsoleKey.A: // left
-                            bLeft = true;
-                            break;
-                        case ConsoleKey.D: // right
-                            bRight = true;
-                            break;
-                        case ConsoleKey.Escape: // pause
-                            bQuit = true;
-                            break;
+                        switch (Console.ReadKey(true).Key)
+                        {
+                            case ConsoleKey.W: // forward
+                                bUp = true;
+                                break;
+                            case ConsoleKey.S: // backward
+                                bDown = true;
+                                break;
+                            case ConsoleKey.A: // left
+                                bLeft = true;
+                                break;
+                            case ConsoleKey.D: // right
+                                bRight = true;
+                                break;
+                            case ConsoleKey.Escape: // pause
+                                bQuit = true;
+                                break;
+                        }
                     }
                 }
-
+                else if (OperatingSystem.IsWindows())
+                {
+                    bUp = bUp | User32.GetAsyncReadKeyState('W') != 0;
+                    bDown = bDown | User32.GetAsyncReadKeyState('S') != 0;
+                    bLeft = bLeft | User32.GetAsyncReadKeyState('A') != 0;
+                    bRight = bRight | User32.GetAsyncReadKeyState('D') != 0;
+                }
                 // update console size if changed
                 if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
                 {
