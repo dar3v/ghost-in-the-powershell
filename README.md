@@ -1,15 +1,16 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
+
 # Table of Contents
 - [About](#about)
 - [Installation](#installation)
-- [Credits](#credits-)
+- [Credits](#credits)
 
-# About
+<h1 id="about">About</h1>
 GHOST in the POWERSHELL is a 3D Maze Game where you collect six pages in 5 levels in order to escape.
 
-finish the maze within the alotted time or the ghost will catch you! 
+finish the maze within the alotted time before the ghost will catch you!
 
-## Installation
+<h2 id="installation">Installation</h2>
 
 <details>
 <summary><b>Windows</b></summary>
@@ -25,7 +26,7 @@ finish the maze within the alotted time or the ghost will catch you!
 
 </details>
 
-## Credits 🎉
+<h2 id="credits">Credits 🎉</h2>
 - [javidx9](https://www.youtube.com/@javidx9) made the tutorial for 3d first-person game in console written in c++
     - [github](https://github.com/OneLoneCoder/CommandLineFPS)
     - [youtube video](https://www.youtube.com/watch?v=xW8skO7MFYw)
