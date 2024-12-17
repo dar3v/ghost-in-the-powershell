@@ -27,6 +27,7 @@ finish the maze within the alotted time before the ghost will catch you!
 </details>
 
 <h2 id="credits">Credits 🎉</h2>
+
 - [javidx9](https://www.youtube.com/@javidx9) made the tutorial for 3d first-person game in console written in c++
     - [github](https://github.com/OneLoneCoder/CommandLineFPS)
     - [youtube video](https://www.youtube.com/watch?v=xW8skO7MFYw)
