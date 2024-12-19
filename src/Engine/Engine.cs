@@ -4,19 +4,13 @@ using System.Text;
 
 namespace RaycasterCS
 {
-    /*
-     *  InitGame class
-     *  This class gets initial values for
-     *    - map;
-     *    - player position & angle
-     *  this is then passed to the Engine class
-     *  and it will then Render it to the console buffer
-     *
-     *  TODO: make variables here assignable from another class
-     */
-
     public static class InitGame
     {
+        // NOTE: 
+        // these values must be set before calling the `Engine.Start()` method
+        // otherwise placeholder values will be set
+        // make sure values of `initMapWidth` and `initMapHeight` checks out with the rows and columns of `MazeMap`
+
         public static string[]? MazeMap { get; set; }
         public static int initMapHeight { get; set; }
         public static int initMapWidth { get; set; }
@@ -30,10 +24,6 @@ namespace RaycasterCS
     // the raycasting engine
     internal class Engine
     {
-        // TODO: adjust game speed accordingly to each individual systems
-        float fSpeed = 50.0f;
-        float fRotationSpeed = 1.25f;
-
         internal void Start()
         {
             // --initiallize variables---
@@ -41,10 +31,16 @@ namespace RaycasterCS
             float fPlayerY = InitGame.initPlayerY;
             float fPlayerA = 0;
 
+            // TODO: adjust game speed accordingly to each individual systems
+            float fSpeed = 50.0f;
+            float fRotationSpeed = 1.25f;
+
             string[] map;
             int nMapHeight = InitGame.initMapHeight;
             int nMapWidth = InitGame.initMapWidth;
 
+            // handle uninitialized variables
+            // just add a sample map if variables are unset
             if (InitGame.MazeMap == null)
             {
                 map =
@@ -80,8 +76,8 @@ namespace RaycasterCS
             }
 
             // screen stuff
-            int nScreenWidth = 120;
-            int nScreenHeight = 40;
+            int nScreenWidth = Console.WindowWidth;
+            int nScreenHeight = Console.WindowHeight;
             char[,] screen = new char[nScreenWidth, nScreenHeight];
 
             int nConsoleWidth = Console.WindowWidth;
@@ -104,6 +100,8 @@ namespace RaycasterCS
 
             while (true) // the game loop
             {
+                ConsoleSize();
+
                 Controls();
                 Render();
 
@@ -112,20 +110,35 @@ namespace RaycasterCS
             stopwatch.Stop();
             return;
 
+            // first, update console size if changed
+            void ConsoleSize()
+            {
+                while (true)
+                {
+                    if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
+                    {
+                        Console.Clear();
+                        nConsoleWidth = Console.WindowWidth;
+                        nConsoleHeight = Console.WindowHeight;
+                    }
+
+                    // handle invalid console size
+                    bConsoleLargeEnough = nConsoleWidth >= nScreenWidth && nConsoleHeight >= nScreenHeight;
+
+                    if (bConsoleLargeEnough) break;
+                    if (!bConsoleLargeEnough)
+                    {
+                        Console.CursorVisible = false;
+                        Console.SetCursorPosition(0, 0);
+                        Console.WriteLine("Console not large enough.");
+                        Console.WriteLine($"Current size: {nConsoleWidth}x{nConsoleHeight}");
+                        Console.WriteLine($"Minimum size: {nScreenWidth}x{nScreenHeight}");
+                    }
+                }
+            }
+
             void Controls()
             {
-                // first, update console size if changed
-                if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
-                {
-                    Console.Clear();
-                    nConsoleWidth = Console.WindowWidth;
-                    nConsoleHeight = Console.WindowHeight;
-                }
-
-                // handle invalid console size
-                bConsoleLargeEnough = nConsoleWidth >= nScreenWidth && nConsoleHeight >= nScreenHeight;
-                if (!bConsoleLargeEnough) return;
-
                 bool bUp = false, bDown = false, bLeft = false, bRight = false;
 
                 // use Window's API to get keyboard information directly from hardware
@@ -206,16 +219,6 @@ namespace RaycasterCS
             // 90% of the raycasting tech goodness
             void Render()
             {
-                // check if console size is large enough
-                if (!bConsoleLargeEnough)
-                {
-                    Console.CursorVisible = false;
-                    Console.SetCursorPosition(0, 0);
-                    Console.WriteLine("Console not large enough.");
-                    Console.WriteLine($"Current size: {nConsoleWidth}x{nConsoleHeight}");
-                    Console.WriteLine($"Minimum size: {nScreenWidth}x{nScreenHeight}");
-                    return;
-                }
 
                 for (int x = 0; x < nScreenWidth; x++)
                 {
