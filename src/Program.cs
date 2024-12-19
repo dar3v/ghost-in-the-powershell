@@ -3,82 +3,89 @@ using WriteFunc;
 using NetCoreAudio;
 using Menu;
 using RaycasterCS;
+
 namespace Ghost_in_The_PowerShell
 {
         internal class Program
         {
             private static Player? bgPlayer;
-            public static Player? gameBgPlayer;
+
             public static void Main(string[] args)
             {
                 Console.CursorVisible = false;
                 Clear();
-                loadingBar();
-                someethingLoading();
+                // loadingBar();
+                // someethingLoading();
                 Start();
 
                 Console.CursorVisible = true;
             }
-            static void someethingLoading()
-            {
-                //156 , 46
-                // Console.WriteLine(Console.WindowWidth);
-                // Console.WriteLine(Console.WindowHeight);
-                Console.CursorVisible = false;
 
-                int consoleWidth = Console.WindowWidth;
-                int consoleHeight = Console.WindowHeight;
+           // NOTE: commented this method so debugging has less friction (waiting for the loading screen is yes)
+           //
+           // static void someethingLoading()
+           // {
+           //     //156 , 46
+           //     // Console.WriteLine(Console.WindowWidth);
+           //     // Console.WriteLine(Console.WindowHeight);
+           //     Console.CursorVisible = false;
 
-                for (int i = 0; i < consoleWidth; i++)
-                {
-                    for (int j = 0; j < consoleHeight; j++)
-                    {
-                        if (j % 2 == 0)
-                        {
-                            Console.SetCursorPosition(i, j);
-                            Console.Write('█');
-                        }
-                        else
-                        {
-                            Console.SetCursorPosition(consoleWidth - 1 - i, j);
-                            Console.Write('█'); ;
+           //     int consoleWidth = Console.WindowWidth;
+           //     int consoleHeight = Console.WindowHeight;
 
-                        }
-                    }
-                    Thread.Sleep(1);
-                }
-            }
+           //     for (int i = 0; i < consoleWidth; i++)
+           //     {
+           //         for (int j = 0; j < consoleHeight; j++)
+           //         {
+           //             if (j % 2 == 0)
+           //             {
+           //                 Console.SetCursorPosition(i, j);
+           //                 Console.Write('█');
+           //             }
+           //             else
+           //             {
+           //                 Console.SetCursorPosition(consoleWidth - 1 - i, j);
+           //                 Console.Write('█'); ;
 
-            static void loadingBar() //added a loading in the start of the game
-            {
-                //setting the dimension of the console window
-                int consoleWidth = Console.WindowWidth;
-                int consoleHeight = Console.WindowHeight;
+           //             }
+           //         }
+           //         Thread.Sleep(1);
+           //     }
+           // }
 
-                //calculation for the vertical center
-                int verticalCenter = (consoleHeight / 2) + 11;
+           // NOTE: yes
+           //
+           // static void loadingBar() //added a loading in the start of the game
+           // {
+           //     //setting the dimension of the console window
+           //     int consoleWidth = Console.WindowWidth;
+           //     int consoleHeight = Console.WindowHeight;
 
-                //calculating the horizontal start position for centering the bar
-                int barWidth = 50;
-                int barStart = (consoleWidth - barWidth) / 2;
+           //     //calculation for the vertical center
+           //     int verticalCenter = (consoleHeight / 2) + 11;
 
-                for (int i = 0; i <= barWidth; i++)
-                {
-                    // calculate the horizontal position of the text
-                    int progressBarStart = (consoleWidth - 8) / 2;
+           //     //calculating the horizontal start position for centering the bar
+           //     int barWidth = 50;
+           //     int barStart = (consoleWidth - barWidth) / 2;
 
-                    //sets the position of the cursor for the progress bar                
-                    Console.SetCursorPosition(barStart, verticalCenter);
-                    System.Console.WriteLine(new string ('█', i)); //drawing of the progress bar
+           //     for (int i = 0; i <= barWidth; i++)
+           //     {
+           //         // calculate the horizontal position of the text
+           //         int progressBarStart = (consoleWidth - 8) / 2;
 
-                    //sets the position of the cursor for the progress bar percentage
-                    Console.SetCursorPosition(progressBarStart, verticalCenter + 1);
-                    System.Console.WriteLine($"{i * 2}/100");
+           //         //sets the position of the cursor for the progress bar                
+           //         Console.SetCursorPosition(barStart, verticalCenter);
+           //         System.Console.WriteLine(new string ('█', i)); //drawing of the progress bar
 
-                    Thread.Sleep(40); //will simulate the loading time
+           //         //sets the position of the cursor for the progress bar percentage
+           //         Console.SetCursorPosition(progressBarStart, verticalCenter + 1);
+           //         System.Console.WriteLine($"{i * 2}/100");
 
-                }
-            }
+           //         Thread.Sleep(40); //will simulate the loading time
+
+           //     }
+           // }
+
             public static void Start()
             {
                 bgPlayer = new Player();
@@ -181,6 +188,7 @@ namespace Ghost_in_The_PowerShell
                 CWriteFunc.CenteredText("\n", ref currentRow);
                 CWriteFunc.CenteredText("Are You Sure You Want To Exit?", ref currentRow);
                 CWriteFunc.CenteredText("If So, Press Enter Key To Escape Your Impending Doom!", ref currentRow);
+
                 ConsoleKeyInfo terminateProgram = Console.ReadKey(true);
 
                 if (terminateProgram.Key == ConsoleKey.Enter) 
