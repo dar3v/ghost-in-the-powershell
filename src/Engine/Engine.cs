@@ -76,8 +76,8 @@ namespace RaycasterCS
             }
 
             // screen stuff
-            int nScreenWidth = Console.WindowWidth;
-            int nScreenHeight = Console.WindowHeight;
+            int nScreenWidth = 120;
+            int nScreenHeight = 40;
             char[,] screen = new char[nScreenWidth, nScreenHeight];
 
             int nConsoleWidth = Console.WindowWidth;
