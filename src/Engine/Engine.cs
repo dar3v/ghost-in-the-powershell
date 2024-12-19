@@ -17,55 +17,19 @@ namespace RaycasterCS
 
     public static class InitGame
     {
-        public static int initMapHeight = 16;
-        public static int initMapWidth = 16;
-        public static string[] map =
-        [
-            // (0,0)      (+,0)
-            "###############",
-            "#.............#",
-            "#.#####..####.#",
-            "#.#.........#.#",
-            "#.#.###..##.#.#",
-            "#.#.#.....#.#.#",
-            "#.#.#.###.#.#.#",
-            "#.....###.....#",
-            "#.....###.....#",
-            "#.#.#.....#.#.#",
-            "#.#.###..##.#.#",
-            "#.#.........#.#",
-            "#.#####..####.#",
-            "#.............#",
-            "###############",
-            // (0,+)      (+,+)
-        ];
+        public static string[]? MazeMap { get; set; }
+        public static int initMapHeight { get; set; }
+        public static int initMapWidth { get; set; }
 
-        // player position, as well as angle player is looking at
-        public static float initPlayerX = 1.0f;
-        public static float initPlayerY = 1.0f;
-        public static float initPlayerA = 5.0f;
+        // player position
+        public static float initPlayerX { get; set; }
+        public static float initPlayerY { get; set; }
     }
 
     // ---class Engine---
     // the raycasting engine
     internal class Engine
     {
-        //
-        // ---Level class variables---
-        //
-
-        // map
-        int nMapHeight = InitGame.initMapHeight;
-        int nMapWidth = InitGame.initMapWidth;
-
-        string[] map = InitGame.map;
-
-        // player position & angle
-        float fPlayerX = InitGame.initPlayerX;
-        float fPlayerY = InitGame.initPlayerY;
-        float fPlayerA = InitGame.initPlayerA;
-
-        // player speed
         // TODO: adjust game speed accordingly to each individual systems
         float fSpeed = 50.0f;
         float fRotationSpeed = 1.25f;
@@ -73,6 +37,41 @@ namespace RaycasterCS
         internal void Start()
         {
             // --initiallize variables---
+            float fPlayerX = InitGame.initPlayerX;
+            float fPlayerY = InitGame.initPlayerY;
+            float fPlayerA = 0;
+
+            string[] map;
+            int nMapHeight = InitGame.initMapHeight;
+            int nMapWidth = InitGame.initMapWidth;
+
+            if (InitGame.MazeMap == null)
+            {
+                map =
+                  [
+                  "###############",
+                  "#.............#",
+                  "#.#####..####.#",
+                  "#.#.........#.#",
+                  "#.#.###..##.#.#",
+                  "#.#.#.....#.#.#",
+                  "#.#.#.###.#.#.#",
+                  "#.....###.....#",
+                  "#.....###.....#",
+                  "#.#.#.....#.#.#",
+                  "#.#.###..##.#.#",
+                  "#.#.........#.#",
+                  "#.#####..####.#",
+                  "#.............#",
+                  "###############",
+                  ];
+                fPlayerX = 1.0f;
+                fPlayerY = 1.0f;
+
+                nMapWidth = 16;
+                nMapHeight = 16;
+            }
+            else map = InitGame.MazeMap;
 
             if (OperatingSystem.IsWindows()) // adjust speed accordingly to user OS
             {
@@ -251,14 +250,14 @@ namespace RaycasterCS
                                 bHitWall = true;
                                 List<(float, float)> p = new();
                                 for (int tx = 0; tx < 2; tx++)
-                                for (int ty = 0; ty < 2; ty++)
-                                {
-                                    float vy = (float)nTestY + ty - fPlayerY;
-                                    float vx = (float)nTestX + tx - fPlayerX;
-                                    float d = MathF.Sqrt(vx * vx + vy * vy);
-                                    float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
-                                    p.Add((d, dot));
-                                }
+                                    for (int ty = 0; ty < 2; ty++)
+                                    {
+                                        float vy = (float)nTestY + ty - fPlayerY;
+                                        float vx = (float)nTestX + tx - fPlayerX;
+                                        float d = MathF.Sqrt(vx * vx + vy * vy);
+                                        float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
+                                        p.Add((d, dot));
+                                    }
                                 p.Sort((a, b) => a.Item1.CompareTo(b.Item1));
                                 float fBound = 0.01f;
                                 if (MathF.Acos(p[0].Item2) < fBound)
@@ -324,12 +323,12 @@ namespace RaycasterCS
                 {
                     string[] debug = { $"x:{fPlayerX}", $"y:{fPlayerY}", $"a:{fPlayerA}" };
                     for (int i = 0; i < debug.Length; i++)
-                    for (int j = 0; j < debug[i].Length; j++)
-                        screen[nScreenWidth - debug[i].Length + j, i] = debug[i][j];
+                        for (int j = 0; j < debug[i].Length; j++)
+                            screen[nScreenWidth - debug[i].Length + j, i] = debug[i][j];
 
                     for (int y = 0; y < map.Length; y++)
-                    for (int x = 0; x < map[y].Length; x++)
-                        screen[x, y] = map[y][x];
+                        for (int x = 0; x < map[y].Length; x++)
+                            screen[x, y] = map[y][x];
 
                     screen[(int)fPlayerX, (int)fPlayerY] = 'P';
                 }
