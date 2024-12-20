@@ -31,31 +31,32 @@ namespace Ghost_in_The_PowerShell
         private static void runHomeMenu()
         {
             Console.ResetColor();
-            string prompt =
-    @"
 
 
-                                          ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ██▓ ███▄    █    ▄▄▄█████▓ ██░ ██ ▓█████
-                                         ██▒ ▀█▒▓██░ ██▒▒██▒  ██▒▒██    ▒ ▓  ██▒ ▓▒    ▓██▒ ██ ▀█   █    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀
-                                        ▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ▒██▒▓██  ▀█ ██▒   ▒ ▓██░ ▒░▒██▀▀██░▒███   
-                                        ▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ░██░▓██▒  ▐▌██▒   ░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄ 
-                                        ░▓█  ██▓░▓█ ░██ ▒██   ██░  ▒   ██▒░ ▓██▓ ░     ░██░▒██░   ▓██░     ▒██▒ ░ ░▓█▒░██▓░▒████▒
-                                        ░▒▓███▀▒░▓█▒░██▓░ ████▓▒░▒██████▒▒  ▒██▒ ░     ░▓  ░ ▒░   ▒ ▒      ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░
-                                         ░▒   ▒  ▒ ░░▒░▒░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░  ▒ ░░        ▒ ░░ ░░   ░ ▒░       ░     ▒ ░▒░ ░ ░ ░  ░
-                                          ░   ░  ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░▒  ░ ░    ░         ▒ ░   ░   ░ ░      ░       ░  ░░ ░   ░   
-                                        ░ ░   ░  ░  ░░ ░░ ░ ░ ▒  ░  ░  ░     ░                    ░              ░  ░  ░   ░  ░
+            string[] prompt = 
+            {
+                "  ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ██▓ ███▄    █    ▄▄▄█████▓ ██░ ██ ▓█████   ",
+                "██▒ ▀█▒▓██░ ██▒▒██▒  ██▒▒██    ▒ ▓  ██▒ ▓▒    ▓██▒ ██ ▀█   █    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀",
+                "▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ▒██▒▓██  ▀█ ██▒   ▒ ▓██░ ▒░▒██▀▀██░▒███   ",
+                "▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ░██░▓██▒  ▐▌██▒   ░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄ ",
+                "░▓█  ██▓░▓█ ░██ ▒██   ██░  ▒   ██▒░ ▓██▓ ░     ░██░▒██░   ▓██░     ▒██▒ ░ ░▓█▒░██▓░▒████▒",
+                "░▒▓███▀▒░▓█▒░██▓░ ████▓▒░▒██████▒▒  ▒██▒ ░     ░▓  ░ ▒░   ▒ ▒      ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░",
+                " ░▒   ▒  ▒ ░░▒░▒░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░  ▒ ░░        ▒ ░░ ░░   ░ ▒░       ░     ▒ ░▒░ ░ ░ ░  ░",
+                "  ░   ░  ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░▒  ░ ░    ░         ▒ ░   ░   ░ ░      ░       ░  ░░ ░   ░   ",
+                "░ ░   ░  ░  ░░ ░░ ░ ░ ▒  ░  ░  ░     ░                    ░              ░  ░  ░   ░  ",
+                "   ██▓███   ▒█████   █     █░▓█████  ██▀███    ██████  ██░ ██ ▓█████  ██▓     ██▓    ",
+                "▓██░  ██▒▒██▒  ██▒▓█░ █ ░█░▓█   ▀ ▓██ ▒ ██▒▒██    ▒ ▓██░ ██▒▓█   ▀ ▓██▒    ▓██▒    ",
+                "▓██░ ██▓▒▒██░  ██▒▒█░ █ ░█ ▒███   ▓██ ░▄█ ▒░ ▓██▄   ▒██▀▀██░▒███   ▒██░    ▒██░    ",
+                "▒██▄█▓▒ ▒▒██   ██░░█░ █ ░█ ▒▓█  ▄ ▒██▀▀█▄    ▒   ██▒░▓█ ░██ ▒▓█  ▄ ▒██░    ▒██░    ",
+                "▒██▒ ░  ░░ ████▓▒░░░██▒██▓ ░▒████▒░██▓ ▒██▒▒██████▒▒░▓█▒░██▓░▒████▒░██████▒░██████▒",
+                "▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  ░░ ▒░ ░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░",
+                "░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   ",
+                "░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░",
 
-                                           ██▓███   ▒█████   █     █░▓█████  ██▀███    ██████  ██░ ██ ▓█████  ██▓     ██▓    
-                                        ▓██░  ██▒▒██▒  ██▒▓█░ █ ░█░▓█   ▀ ▓██ ▒ ██▒▒██    ▒ ▓██░ ██▒▓█   ▀ ▓██▒    ▓██▒    
-                                        ▓██░ ██▓▒▒██░  ██▒▒█░ █ ░█ ▒███   ▓██ ░▄█ ▒░ ▓██▄   ▒██▀▀██░▒███   ▒██░    ▒██░    
-                                        ▒██▄█▓▒ ▒▒██   ██░░█░ █ ░█ ▒▓█  ▄ ▒██▀▀█▄    ▒   ██▒░▓█ ░██ ▒▓█  ▄ ▒██░    ▒██░    
-                                        ▒██▒ ░  ░░ ████▓▒░░░██▒██▓ ░▒████▒░██▓ ▒██▒▒██████▒▒░▓█▒░██▓░▒████▒░██████▒░██████▒
-                                        ▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  ░░ ▒░ ░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░
-                                        ░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   
-                                        ░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░
+            };
 
-";
-
+            // CWriteFunc.RenderUpperCenteredStrings(prompt);
+            
             string[] options = { "Play", " About", "Exit" };
             Menu_C homeMenu = new Menu_C(prompt, options);
             int indexSelected = homeMenu.Run();
@@ -88,22 +89,43 @@ namespace Ghost_in_The_PowerShell
 
             Clear();
 
-            int currentRow = consoleHeight / 2 - 4;
+            // int currentRow = consoleHeight / 2 - 4;
             // Print each string centered in the console
             // NOTE: @Zeki-Zek pls make this cleaner (utilize loops and arrays)
-            CWriteFunc.CenteredText("\"ABOUT\"", ref currentRow);
-            CWriteFunc.CenteredText("\n", ref currentRow);
-            CWriteFunc.CenteredText("This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.", ref currentRow);
-            CWriteFunc.CenteredText("\n", ref currentRow);
-            CWriteFunc.CenteredText("The Team consists of Students From BSCS 1B:", ref currentRow);
-            CWriteFunc.CenteredText("\n", ref currentRow);
-            CWriteFunc.CenteredText("\"Ezekiel Viray\"", ref currentRow);
-            CWriteFunc.CenteredText("\"Dan Rev Paco\"", ref currentRow);
-            CWriteFunc.CenteredText("\"John Wayne Capistrano\"", ref currentRow);
-            CWriteFunc.CenteredText("\n", ref currentRow);
-            CWriteFunc.CenteredText("Through this project, the developers aim to apply and showcase the fundamental programming", ref currentRow);
-            CWriteFunc.CenteredText("concepts learned throughout their course. This marks an important milestone in their academic", ref currentRow);
-            CWriteFunc.CenteredText("journey as they work together to build a functional application while adhering to best practices in software development.", ref currentRow);
+            //DONE:
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            string[] aboutInfo = 
+                {
+                    "\"ABOUT\"",
+                    "\n",
+                    "This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.",
+                    "\n",
+                    "The Team consists of Students From BSCS 1B:",
+                    "\"Ezekiel Viray\"",
+                    "\"Dan Rev Paco\"",
+                    "\"John Wayne Capistrano\"",
+                    "\n",
+                    "Through this project, the developers aim to apply and showcase the fundamental programming",
+                    "concepts learned throughout their course. This marks an important milestone in their academic",
+                    "journey as they work together to build a functional application while adhering to best practices in software development.",
+
+                };
+                CWriteFunc.RenderCenteredStrings(aboutInfo);
+
+            // CWriteFunc.CenteredText("\"ABOUT\"", ref currentRow);
+            // CWriteFunc.CenteredText("\n", ref currentRow);
+            // CWriteFunc.CenteredText("This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.", ref currentRow);
+            // CWriteFunc.CenteredText("\n", ref currentRow);
+            // CWriteFunc.CenteredText("The Team consists of Students From BSCS 1B:", ref currentRow);
+            // CWriteFunc.CenteredText("\n", ref currentRow);
+            // CWriteFunc.CenteredText("\"Ezekiel Viray\"", ref currentRow);
+            // CWriteFunc.CenteredText("\"Dan Rev Paco\"", ref currentRow);
+            // CWriteFunc.CenteredText("\"John Wayne Capistrano\"", ref currentRow);
+            // CWriteFunc.CenteredText("\n", ref currentRow);
+            // CWriteFunc.CenteredText("Through this project, the developers aim to apply and showcase the fundamental programming", ref currentRow);
+            // CWriteFunc.CenteredText("concepts learned throughout their course. This marks an important milestone in their academic", ref currentRow);
+            // CWriteFunc.CenteredText("journey as they work together to build a functional application while adhering to best practices in software development.", ref currentRow);
 
             ReadKey(true);  // Wait for key press to proceed
             Console.ResetColor();
@@ -114,16 +136,27 @@ namespace Ghost_in_The_PowerShell
         {
             Clear();
 
-            int consoleHeight = Console.WindowHeight;
-            int currentRow = consoleHeight / 2;
+            // int consoleHeight = Console.WindowHeight;
+            // int currentRow = consoleHeight / 2;
 
             // NOTE: @Zeki-Zek pls make this cleaner (utilize loops and arrays)
             //
-            //ForegroundColor = ConsoleColor.DarkRed;
-            CWriteFunc.CenteredText("\"EXIT\"", ref currentRow);
-            CWriteFunc.CenteredText("\n", ref currentRow);
-            CWriteFunc.CenteredText("Are You Sure You Want To Exit?", ref currentRow);
-            CWriteFunc.CenteredText("If So, Press Enter Key To Escape Your Impending Doom!", ref currentRow);
+            ForegroundColor = ConsoleColor.DarkRed;
+            string[] exitInfo = 
+                {
+                    "\"EXIT\"",
+                    "\n",
+                    "Are You Sure You Want To Exit?",
+                    "If So, Press Enter Key To Escape Your Impending Doom!",
+                };
+
+                CWriteFunc.RenderCenteredStrings(exitInfo);
+
+
+            // CWriteFunc.CenteredText("\"EXIT\"", ref currentRow);
+            // CWriteFunc.CenteredText("\n", ref currentRow);
+            // CWriteFunc.CenteredText("Are You Sure You Want To Exit?", ref currentRow);
+            // CWriteFunc.CenteredText("If So, Press Enter Key To Escape Your Impending Doom!", ref currentRow);
 
             ConsoleKeyInfo terminateProgram = Console.ReadKey(true);
 
@@ -140,8 +173,8 @@ namespace Ghost_in_The_PowerShell
 
         }
 
-        // NOTE: commented this method so debugging has less friction (waiting for the loading screen is yes)
-        //
+        //NOTE: commented this method so debugging has less friction (waiting for the loading screen is yes)
+        
         // static void someethingLoading()
         // {
         //     //156 , 46
@@ -172,8 +205,8 @@ namespace Ghost_in_The_PowerShell
         //     }
         // }
 
-        // NOTE: yes
-        //
+        // //NOTE: yes
+        
         // static void loadingBar() //added a loading in the start of the game
         // {
         //     //setting the dimension of the console window
