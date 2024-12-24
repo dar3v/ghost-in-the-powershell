@@ -27,6 +27,40 @@ namespace RaycasterCS
         internal void Start()
         {
             // --initiallize variables---
+            string[] spriteStatue = [
+              "````````````````⢀⡵⠀⠀⣡⡤⣤⣀⣙⢨⡿````````````````",
+              "````````````````⠊⠐⡀⢠⡄⣴⠿⣟⣿⣷⣻⣤⣤⣿`````````````",
+              "``````````````⣽⣿⣿⣿⠛⠛⠁⠀⠛⠉⠀⠀⠙⣿⣽⣿⠈⢿```````````",
+              "````````````⣤⣾⠛⢻⣿⠁⠀⠀⠀⠀⠀⠀⣀⣀⣄⡘⣿⣿⣿⡈```````````",
+              "```````````⠟⠫⠽⣷⣾⣿⡤⠶⠄⢆⠀⠀⣾⣽⣶⣶⠁⢿⣿⣛⣒⠞⣿`````````",
+              "```````````⣀⣄⣠⣿⣿⡟⣰⣾⣿⠿⢷⠀⠉⠉⠉⠁⠀⢨⣿⣿⣿⣷⡼`````````",
+              "```````````⢯⣾⣿⣷⣿⣧⠀⠀⠀⠀⠈⠁⠦⡄⠀⠀⠀⣸⣾⣷⢹⣨⣿`````````",
+              "```````````⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⢦⣄⣰⠆⠀⠀⠀⣿⣿⣧⢼⣏``````````",
+              "```````````⣽⠙⢻⣟⣿⣿⣷⡀⠀⠀⣀⣬⣵⡶⡶⠀⢠⣿⣿⣿⣴⡝⠾⢿````````",
+              "```````````⣿⢸⡿⣿⣿⣿⣿⣧⠀⠀⠈⠠⢴⡿⠁⠀⣾⣿⢿⣿⣿⣧⣲⣸````````",
+              "```````````⣿⣾⠟⣿⣿⣿⣷⣿⠳⢤⠀⠀⠀⠀⡴⠀⡿⣿⣿⣿⣿⣝⢿⡅````````",
+              "```````````⡏⢫⣾⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⢿⢺⠋⠙⣿⣿⣾⣿⣦```````",
+              "```````````⠋⣩⣟⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡶⣾⣟⣱⣼⠿⠛```````",
+              "``````````⢶⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣆⣛⣿⣿⣾⣦```````",
+              "`````````⣷⣾⡿⠻⡅⠀⠄⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢟⡻⣿⣏⣝⣷⣶``````",
+              "`````````⡿⠁⠀⠀⠹⣄⠀⠐⠀⠰⡄⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⣹⠿⢽⣿⣿``````",
+              "```````⡿⠋⠀⠀⠀⠀⠀⠈⠧⠀⠀⠀⠉⠀⠐⠆⠀⠀⠀⠀⠋⠀⠀⠀⢸⡇⠀⠀⠉⢻``````",
+              "`````⣿⠋⠀⠀⠀⡀⠀⠀⠀⠀⠀⠙⠦⡀⣆⠁⠀⠀⠀⠀⠀⠈⠀⠀⢀⡔⠀⠁⠀⠀⠀⠀⠙⢿````",
+              "`````⠃⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡟⠦⠐⢀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻```",
+              "```⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⠇⠀⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿``",
+              "```⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿`",
+              "```⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`",
+              "```⡇⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`",
+              "``⣿⠃⠀⡄⠀⠀⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸`",
+              "``⡇⠀⠀⠳⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸`",
+              "``⣿⠀⠀⢀⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿",
+              "``⠇⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⢸",
+              "`⡟⠀⠀⠀⠰⡀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣶⠀⠀⠀⠈⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
+              "`⠇⠀⠀⠀⠀⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⢹⡶⣠⡌⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
+              "⣿ ⠀⠀⠀⠁⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢠⠀⠙⢻⣧⡄⠉⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
+              "⣇⣤⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣤⣀⣀⣀⣀⣀⣸⣎⣷⣤⣽⣧⣤⣇⣀⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣀⣤⣄⣀⣀⣸",
+            ];
+
             float fPlayerX = InitGame.initPlayerX;
             float fPlayerY = InitGame.initPlayerY;
             float fPlayerA = 0;
@@ -75,10 +109,17 @@ namespace RaycasterCS
                 fRotationSpeed = 0.125f;
             }
 
+            // statues
+            List<(float x, float y)> statue = new();
+            for (int y = 0; y < map.Length; y++)
+                for (int x = 0; x < map[y].Length; x++)
+                    if (map[y][x] == '@') statue.Add((y + 0.5f, x + 0.5f));
+
             // screen stuff
             int nScreenWidth = 120;
             int nScreenHeight = 40;
             char[,] screen = new char[nScreenWidth, nScreenHeight];
+            float[,] depthBuffer = new float[nScreenWidth, nScreenHeight];
 
             int nConsoleWidth = Console.WindowWidth;
             int nConsoleHeight = Console.WindowHeight;
@@ -168,7 +209,7 @@ namespace RaycasterCS
                             bRight = true;
                             break;
                         case ConsoleKey.Escape: // pause
-                            bQuit = true;
+                            optExit();
                             break;
                     }
                 }
@@ -214,11 +255,21 @@ namespace RaycasterCS
                         fPlayerA %= MathF.PI * 2;
                     }
                 }
+                void optExit()
+                {
+                    Console.Clear();
+                    Console.WriteLine("r u sure? (y/N)");
+                    ConsoleKeyInfo opt = Console.ReadKey(true);
+
+                    if (opt.Key is ConsoleKey.Y) bQuit = true;
+                }
             }
 
             // 90% of the raycasting tech goodness
             void Render()
             {
+                for (int y = 0; y < nScreenHeight; y++)
+                    for (int x = 0; x < nScreenHeight; x++) depthBuffer[x, y] = float.MaxValue;
 
                 for (int x = 0; x < nScreenWidth; x++)
                 {
@@ -279,6 +330,8 @@ namespace RaycasterCS
                     int nFloor = nScreenHeight - nCeiling;
 
                     char nShade = ' ';
+                    for (int y = 0; y < nScreenHeight; y++)
+                        depthBuffer[x, y] = fDistanceToWall;
 
                     // shading for walls
                     if (fDistanceToWall <= fDepth / 4.0f)
@@ -319,6 +372,46 @@ namespace RaycasterCS
                             screen[x, y] = nShade;
                         }
                     }
+                }
+
+                foreach (var statue in statue)
+                {
+                    float fAngle = MathF.Atan2(statue.y - fPlayerY, statue.x - fPlayerX);
+                    float fovfAngleA = fPlayerA - fFOV / 2;
+                    if (fAngle < 0) fAngle += 2f * MathF.PI;
+
+                    float fVecX = statue.x - fPlayerX;
+                    float fVecY = statue.y - fPlayerY;
+                    float fDistanceFromPlayer = MathF.Sqrt(fVecX * fVecX + fVecY * fVecY);
+
+                    int nCeiling = (int)((float)(nScreenHeight / 2.0f) - nScreenHeight / ((float)fDistanceFromPlayer));
+                    int nFloor = nScreenHeight - nCeiling;
+
+                    string[] statueSprite = spriteStatue;
+
+                    float fDiff = fAngle < fPlayerA && fovfAngleA - 2f * MathF.PI + fFOV > fAngle ?
+                      fAngle + 2f * (float)Math.PI - fovfAngleA : fAngle - fovfAngleA;
+
+                    float fRatio = fDiff / fFOV;
+                    int statueScreenX = (int)(nScreenWidth * fRatio);
+                    int statueScreenY = Math.Min(nFloor, screen.GetLength(1));
+
+                    for (int y = 0; y < statueSprite.Length; y++)
+                        for (int x = 0; x < statueSprite[y].Length; x++)
+                        {
+                            if (statueSprite[y][x] != '`')
+                            {
+                                int nScreenX = x - statueSprite[y].Length / 2 + statueScreenX;
+                                int nScreenY = y - statueSprite.Length + statueScreenY;
+                                if (0 <= nScreenX && nScreenX <= nScreenWidth - 1 &&
+                                    0 <= nScreenY && nScreenY <= nScreenHeight - 1 &&
+                                    depthBuffer[nScreenX, nScreenY] > fDistanceFromPlayer)
+                                {
+                                    screen[nScreenX, nScreenY] = statueSprite[y][x];
+                                    depthBuffer[nScreenX, nScreenY] = fDistanceFromPlayer;
+                                }
+                            }
+                        }
                 }
 
                 // display map and coord
