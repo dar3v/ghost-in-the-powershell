@@ -32,7 +32,7 @@ namespace Ghost_in_The_PowerShell
         {
             Console.ResetColor();
 
-
+            //TODO: MAKE THIS RESPONSIVE 
             string[] prompt = 
             {
                 "  ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ██▓ ███▄    █    ▄▄▄█████▓ ██░ ██ ▓█████   ",

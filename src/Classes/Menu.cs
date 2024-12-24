@@ -24,8 +24,8 @@ namespace Menu
             int promptPadding = Console.WindowHeight; 
             
             string instruct = "Use Your Arrow Keys To Hover Through The Selections and Press Enter to Select.";
-            CWriteFunc.RenderUpperCenteredStrings(Prompt);
 
+            CWriteFunc.RenderUpperCenteredStrings(Prompt);
             // Calculate padding for centering the instruction text
             int padding = (consoleWidth - instruct.Length) / 2;
             
