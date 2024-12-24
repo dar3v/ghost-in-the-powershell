@@ -113,20 +113,6 @@ namespace Ghost_in_The_PowerShell
                 };
                 CWriteFunc.RenderCenteredStrings(aboutInfo);
 
-            // CWriteFunc.CenteredText("\"ABOUT\"", ref currentRow);
-            // CWriteFunc.CenteredText("\n", ref currentRow);
-            // CWriteFunc.CenteredText("This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.", ref currentRow);
-            // CWriteFunc.CenteredText("\n", ref currentRow);
-            // CWriteFunc.CenteredText("The Team consists of Students From BSCS 1B:", ref currentRow);
-            // CWriteFunc.CenteredText("\n", ref currentRow);
-            // CWriteFunc.CenteredText("\"Ezekiel Viray\"", ref currentRow);
-            // CWriteFunc.CenteredText("\"Dan Rev Paco\"", ref currentRow);
-            // CWriteFunc.CenteredText("\"John Wayne Capistrano\"", ref currentRow);
-            // CWriteFunc.CenteredText("\n", ref currentRow);
-            // CWriteFunc.CenteredText("Through this project, the developers aim to apply and showcase the fundamental programming", ref currentRow);
-            // CWriteFunc.CenteredText("concepts learned throughout their course. This marks an important milestone in their academic", ref currentRow);
-            // CWriteFunc.CenteredText("journey as they work together to build a functional application while adhering to best practices in software development.", ref currentRow);
-
             ReadKey(true);  // Wait for key press to proceed
             Console.ResetColor();
             runHomeMenu();  // Navigate back to the home menu (if needed)
@@ -151,12 +137,6 @@ namespace Ghost_in_The_PowerShell
                 };
 
                 CWriteFunc.RenderCenteredStrings(exitInfo);
-
-
-            // CWriteFunc.CenteredText("\"EXIT\"", ref currentRow);
-            // CWriteFunc.CenteredText("\n", ref currentRow);
-            // CWriteFunc.CenteredText("Are You Sure You Want To Exit?", ref currentRow);
-            // CWriteFunc.CenteredText("If So, Press Enter Key To Escape Your Impending Doom!", ref currentRow);
 
             ConsoleKeyInfo terminateProgram = Console.ReadKey(true);
 
