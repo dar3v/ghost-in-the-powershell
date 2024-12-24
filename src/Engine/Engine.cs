@@ -209,7 +209,7 @@ namespace RaycasterCS
                             bRight = true;
                             break;
                         case ConsoleKey.Escape: // pause
-                            bQuit = true;
+                            optExit();
                             break;
                     }
                 }
@@ -254,6 +254,14 @@ namespace RaycasterCS
                     {
                         fPlayerA %= MathF.PI * 2;
                     }
+                }
+                void optExit()
+                {
+                    Console.Clear();
+                    Console.WriteLine("r u sure? (y/N)");
+                    ConsoleKeyInfo opt = Console.ReadKey(true);
+
+                    if (opt.Key is ConsoleKey.Y) bQuit = true;
                 }
             }
 
