@@ -2,7 +2,7 @@ using static System.Console;
 using WriteFunc;
 using NetCoreAudio;
 using Menu;
-using RaycasterCS;
+using MazeGame;
 
 namespace Ghost_in_The_PowerShell
 {
@@ -77,8 +77,8 @@ namespace Ghost_in_The_PowerShell
 
         private static void G_playGame()
         {
-            Engine Engine = new();
-            Engine.Start();
+            ScaryMaze Maze = new();
+            Maze.LevelOne();
             runHomeMenu();
         }
 
