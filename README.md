@@ -92,6 +92,7 @@ $ cd /path/to/project/ghost-in-the-powershell
 
 # cd to src/
 $ cd src/
+```
 
   - then in the `src/` directory, run:
   ```sh
