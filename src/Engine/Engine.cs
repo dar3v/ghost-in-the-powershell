@@ -1,288 +1,274 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Numerics;
 using System.Text;
 
 namespace RaycasterCS
 {
-    public static class InitGame
+    class InitGame
     {
-        // NOTE: 
-        // these values must be set before calling the `Engine.Start()` method
+        // NOTE:
+        // these values must be set before calling 'Engine.Start()'
         // otherwise placeholder values will be set
-        // make sure values of `initMapWidth` and `initMapHeight` checks out with the rows and columns of `MazeMap`
 
-        public static string[]? MazeMap { get; set; }
-        public static int initMapHeight { get; set; }
+        // maze map
+        // make sure `initMapWidth` and `initMapHeight` checks out with MazeMap
         public static int initMapWidth { get; set; }
+        public static int initMapHeight { get; set; }
+        public static string[]? MazeMap { get; set; }
 
-        // player position
+        // initial player coords
         public static float initPlayerX { get; set; }
         public static float initPlayerY { get; set; }
+        public static float initPlayerA { get; set; }
     }
 
     // ---class Engine---
     // the raycasting engine
-    internal class Engine
+    class Engine
     {
         internal void Start()
         {
-            // --initiallize variables---
-            string[] spriteStatue = [
-              "````````````````⢀⡵⠀⠀⣡⡤⣤⣀⣙⢨⡿````````````````",
-              "````````````````⠊⠐⡀⢠⡄⣴⠿⣟⣿⣷⣻⣤⣤⣿`````````````",
-              "``````````````⣽⣿⣿⣿⠛⠛⠁⠀⠛⠉⠀⠀⠙⣿⣽⣿⠈⢿```````````",
-              "````````````⣤⣾⠛⢻⣿⠁⠀⠀⠀⠀⠀⠀⣀⣀⣄⡘⣿⣿⣿⡈```````````",
-              "```````````⠟⠫⠽⣷⣾⣿⡤⠶⠄⢆⠀⠀⣾⣽⣶⣶⠁⢿⣿⣛⣒⠞⣿`````````",
-              "```````````⣀⣄⣠⣿⣿⡟⣰⣾⣿⠿⢷⠀⠉⠉⠉⠁⠀⢨⣿⣿⣿⣷⡼`````````",
-              "```````````⢯⣾⣿⣷⣿⣧⠀⠀⠀⠀⠈⠁⠦⡄⠀⠀⠀⣸⣾⣷⢹⣨⣿`````````",
-              "```````````⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⢦⣄⣰⠆⠀⠀⠀⣿⣿⣧⢼⣏``````````",
-              "```````````⣽⠙⢻⣟⣿⣿⣷⡀⠀⠀⣀⣬⣵⡶⡶⠀⢠⣿⣿⣿⣴⡝⠾⢿````````",
-              "```````````⣿⢸⡿⣿⣿⣿⣿⣧⠀⠀⠈⠠⢴⡿⠁⠀⣾⣿⢿⣿⣿⣧⣲⣸````````",
-              "```````````⣿⣾⠟⣿⣿⣿⣷⣿⠳⢤⠀⠀⠀⠀⡴⠀⡿⣿⣿⣿⣿⣝⢿⡅````````",
-              "```````````⡏⢫⣾⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⢿⢺⠋⠙⣿⣿⣾⣿⣦```````",
-              "```````````⠋⣩⣟⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡶⣾⣟⣱⣼⠿⠛```````",
-              "``````````⢶⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣆⣛⣿⣿⣾⣦```````",
-              "`````````⣷⣾⡿⠻⡅⠀⠄⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢟⡻⣿⣏⣝⣷⣶``````",
-              "`````````⡿⠁⠀⠀⠹⣄⠀⠐⠀⠰⡄⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⣹⠿⢽⣿⣿``````",
-              "```````⡿⠋⠀⠀⠀⠀⠀⠈⠧⠀⠀⠀⠉⠀⠐⠆⠀⠀⠀⠀⠋⠀⠀⠀⢸⡇⠀⠀⠉⢻``````",
-              "`````⣿⠋⠀⠀⠀⡀⠀⠀⠀⠀⠀⠙⠦⡀⣆⠁⠀⠀⠀⠀⠀⠈⠀⠀⢀⡔⠀⠁⠀⠀⠀⠀⠙⢿````",
-              "`````⠃⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡟⠦⠐⢀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻```",
-              "```⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⠇⠀⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿``",
-              "```⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿`",
-              "```⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`",
-              "```⡇⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`",
-              "``⣿⠃⠀⡄⠀⠀⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸`",
-              "``⡇⠀⠀⠳⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸`",
-              "``⣿⠀⠀⢀⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿",
-              "``⠇⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⢸",
-              "`⡟⠀⠀⠀⠰⡀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣶⠀⠀⠀⠈⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
-              "`⠇⠀⠀⠀⠀⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⢹⡶⣠⡌⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
-              "⣿ ⠀⠀⠀⠁⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢠⠀⠙⢻⣧⡄⠉⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
-              "⣇⣤⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣤⣀⣀⣀⣀⣀⣸⣎⣷⣤⣽⣧⣤⣇⣀⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣀⣤⣄⣀⣀⣸",
-            ];
+            // --initialize variables--
+            // sprites
+            string[] statueSprite1 =
+            [
+          "````````````````⢀⡵⠀⠀⣡⡤⣤⣀⣙⢨⡿````````````````",
+          "````````````````⠊⠐⡀⢠⡄⣴⠿⣟⣿⣷⣻⣤⣤⣿`````````````",
+          "``````````````⣽⣿⣿⣿⠛⠛⠁⠀⠛⠉⠀⠀⠙⣿⣽⣿⠈⢿```````````",
+          "````````````⣤⣾⠛⢻⣿⠁⠀⠀⠀⠀⠀⠀⣀⣀⣄⡘⣿⣿⣿⡈```````````",
+          "```````````⠟⠫⠽⣷⣾⣿⡤⠶⠄⢆⠀⠀⣾⣽⣶⣶⠁⢿⣿⣛⣒⠞⣿`````````",
+          "```````````⣀⣄⣠⣿⣿⡟⣰⣾⣿⠿⢷⠀⠉⠉⠉⠁⠀⢨⣿⣿⣿⣷⡼`````````",
+          "```````````⢯⣾⣿⣷⣿⣧⠀⠀⠀⠀⠈⠁⠦⡄⠀⠀⠀⣸⣾⣷⢹⣨⣿`````````",
+          "```````````⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⢦⣄⣰⠆⠀⠀⠀⣿⣿⣧⢼⣏``````````",
+          "```````````⣽⠙⢻⣟⣿⣿⣷⡀⠀⠀⣀⣬⣵⡶⡶⠀⢠⣿⣿⣿⣴⡝⠾⢿````````",
+          "```````````⣿⢸⡿⣿⣿⣿⣿⣧⠀⠀⠈⠠⢴⡿⠁⠀⣾⣿⢿⣿⣿⣧⣲⣸````````",
+          "```````````⣿⣾⠟⣿⣿⣿⣷⣿⠳⢤⠀⠀⠀⠀⡴⠀⡿⣿⣿⣿⣿⣝⢿⡅````````",
+          "```````````⡏⢫⣾⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⢿⢺⠋⠙⣿⣿⣾⣿⣦```````",
+          "```````````⠋⣩⣟⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡶⣾⣟⣱⣼⠿⠛```````",
+          "``````````⢶⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣆⣛⣿⣿⣾⣦```````",
+          "`````````⣷⣾⡿⠻⡅⠀⠄⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢟⡻⣿⣏⣝⣷⣶``````",
+          "`````````⡿⠁⠀⠀⠹⣄⠀⠐⠀⠰⡄⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⣹⠿⢽⣿⣿``````",
+          "```````⡿⠋⠀⠀⠀⠀⠀⠈⠧⠀⠀⠀⠉⠀⠐⠆⠀⠀⠀⠀⠋⠀⠀⠀⢸⡇⠀⠀⠉⢻``````",
+          "`````⣿⠋⠀⠀⠀⡀⠀⠀⠀⠀⠀⠙⠦⡀⣆⠁⠀⠀⠀⠀⠀⠈⠀⠀⢀⡔⠀⠁⠀⠀⠀⠀⠙⢿````",
+          "`````⠃⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⡟⠦⠐⢀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻```",
+          "```⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⠇⠀⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿``",
+          "```⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿`",
+          "```⣏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`",
+          "```⡇⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿`",
+          "``⣿⠃⠀⡄⠀⠀⢂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸`",
+          "``⡇⠀⠀⠳⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸`",
+          "``⣿⠀⠀⢀⠀⠀⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿",
+          "``⠇⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⢸",
+          "`⡟⠀⠀⠀⠰⡀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣶⠀⠀⠀⠈⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
+          "`⠇⠀⠀⠀⠀⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⢹⡶⣠⡌⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
+          "⣿ ⠀⠀⠀⠁⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢠⠀⠙⢻⣧⡄⠉⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸",
+          "⣇⣤⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣤⣀⣀⣀⣀⣀⣸⣎⣷⣤⣽⣧⣤⣇⣀⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣀⣤⣄⣀⣀⣸",
+];
+            // booleans
+            bool bCloseRequest = false;
+            bool bConsoleLargeEnough = true;
+            bool bForDevOnly = true; // map and coordinate
+            bool bGameOver = false; // TODO: implement game over logic (`void E_GameOver()`)
+            bool bQuit = false;
 
-            float fPlayerX = InitGame.initPlayerX;
-            float fPlayerY = InitGame.initPlayerY;
-            float fPlayerA = 0;
+            // raycasting variables
+            float fFOV = MathF.PI / 4.0f;
+            float fDepth = 16.0f;
 
-            // TODO: adjust game speed accordingly to each individual systems
-            float fSpeed = 50.0f;
-            float fRotationSpeed = 1.25f;
+            // console game screen variables
+            float fSpeed = 100.0f;
+            float fRotationSpeed = 0.25f;
 
-            string[] map;
-            int nMapHeight = InitGame.initMapHeight;
-            int nMapWidth = InitGame.initMapWidth;
-
-            // handle uninitialized variables
-            // just add a sample map if variables are unset
-            if (InitGame.MazeMap == null)
+            if (OperatingSystem.IsWindows())
             {
-                map =
-                  [
-                  "###############",
-                  "#.............#",
-                  "#.#####..####.#",
-                  "#.#.........#.#",
-                  "#.#.###..##.#.#",
-                  "#.#.#.....#.#.#",
-                  "#.#.#.###.#.#.#",
-                  "#.....###.....#",
-                  "#.....###.....#",
-                  "#.#.#.....#.#.#",
-                  "#.#.###..##.#.#",
-                  "#.#.........#.#",
-                  "#.#####..####.#",
-                  "#.............#",
-                  "###############",
-                  ];
-                fPlayerX = 1.0f;
-                fPlayerY = 1.0f;
-
-                nMapWidth = 16;
-                nMapHeight = 16;
+                fSpeed = 6.0f;
+                fRotationSpeed = 1.25f;
             }
-            else map = InitGame.MazeMap;
-
-            if (OperatingSystem.IsWindows()) // adjust speed accordingly to user OS
-            {
-                fSpeed = 7.0f;
-                fRotationSpeed = 0.125f;
-            }
-
-            // statues
-            List<(float x, float y)> statue = new();
-            for (int y = 0; y < map.Length; y++)
-                for (int x = 0; x < map[y].Length; x++)
-                    if (map[y][x] == '@') statue.Add((y + 0.5f, x + 0.5f));
-
-            // screen stuff
-            int nScreenWidth = 120;
-            int nScreenHeight = 40;
-            char[,] screen = new char[nScreenWidth, nScreenHeight];
-            float[,] depthBuffer = new float[nScreenWidth, nScreenHeight];
 
             int nConsoleWidth = Console.WindowWidth;
             int nConsoleHeight = Console.WindowHeight;
 
-            // player FOV vars for player FOV calculations
-            float fFOV = MathF.PI / 4.0f;
-            float fDepth = 16.0f;
+            int nScreenWidth = 125;
+            int nScreenHeight = 40;
 
-            // etc
-            bool bQuit = false;
-            bool bDisplayCoords = true;
-            bool bConsoleLargeEnough = true;
+            char[,] screen = new char[nScreenWidth, nScreenHeight];
+            float[,] depthBuffer = new float[nScreenWidth, nScreenHeight];
 
-            Stopwatch stopwatch = new Stopwatch();
+            // make sure to assign these variables in `InitGame` class
 
-            // ---Start---
-            Console.Clear();
-            stopwatch = Stopwatch.StartNew();
+            float fPlayerX = InitGame.initPlayerX;
+            float fPlayerY = InitGame.initPlayerY;
+            float fPlayerA = InitGame.initPlayerA;
 
-            while (true) // the game loop
+            int nMapWidth = InitGame.initMapWidth;
+            int nMapHeight = InitGame.initMapHeight;
+
+            string[] map = new string[nMapHeight];
+
+            // handle null `InitGame.MazeMap`
+            // just use a boilerplate map if its null
+            if (InitGame.MazeMap is null)
             {
-                ConsoleSize();
+                map = [
+                  "###############",
+                  "#.............#",
+                  "#...@....####.#",
+                  "#.............#",
+                  "#.#.#....##.#.#",
+                  "#.#.##........#",
+                  "###.##...#....#",
+                  "##............#",
+                  "#####.........#",
+                  "#......@......#",
+                  "#.........##..#",
+                  "#..#########..#",
+                  "#..###...@....#",
+                  "#.............#",
+                  "###############",
+                ];
 
-                Controls();
-                Render();
+                nMapHeight = 16;
+                nMapWidth = 16;
 
+                fPlayerX = 1.5f;
+                fPlayerY = 1.5f;
+            }
+            else map = InitGame.MazeMap;
+
+            // statues
+            List<(float x, float y)> statues = new();
+            for (int y = 0; y < map.Length; y++) // get all statue position from map
+            {
+                for (int x = 0; x < map[0].Length; x++)
+                    if (map[y][x] == '@') statues.Add((x + .5f, y + .5f));
+            }
+
+            // --Start Engine--
+            Console.Clear();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            // --- the game loop ---
+            while (true)
+            {
+                E_HandleConsoleSize();
+
+                E_UpdateFrame();
+                E_RenderFrame();
+
+                if (bCloseRequest) E_CloseRequest();
                 if (bQuit) break;
             }
+            // exit
             stopwatch.Stop();
-            return;
 
-            // first, update console size if changed
-            void ConsoleSize()
+            // update frame function
+            // mostly for player controls
+            void E_UpdateFrame()
             {
-                while (true)
-                {
-                    if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
-                    {
-                        Console.Clear();
-                        nConsoleWidth = Console.WindowWidth;
-                        nConsoleHeight = Console.WindowHeight;
-                    }
+                bool up = false, down = false, left = false, right = false;
 
-                    // handle invalid console size
-                    bConsoleLargeEnough = nConsoleWidth >= nScreenWidth && nConsoleHeight >= nScreenHeight;
-
-                    if (bConsoleLargeEnough) break;
-                    if (!bConsoleLargeEnough)
-                    {
-                        Console.CursorVisible = false;
-                        Console.SetCursorPosition(0, 0);
-                        Console.WriteLine("Console not large enough.");
-                        Console.WriteLine($"Current size: {nConsoleWidth}x{nConsoleHeight}");
-                        Console.WriteLine($"Minimum size: {nScreenWidth}x{nScreenHeight}");
-                    }
-                }
-            }
-
-            void Controls()
-            {
-                bool bUp = false, bDown = false, bLeft = false, bRight = false;
-
-                // use Window's API to get keyboard information directly from hardware
-                if (OperatingSystem.IsWindows())
-                {
-                    bUp = bUp || Win.GetAsyncKeyState('W') is not 0; // forward
-                    bDown = bDown || Win.GetAsyncKeyState('S') is not 0; // backward
-                    bLeft = bLeft || Win.GetAsyncKeyState('A') is not 0; // left
-                    bRight = bRight || Win.GetAsyncKeyState('D') is not 0; // right
-                }
-                // synchrounous controls for other systems
-                // as well as controls that doesnt need to be asynchrounous
+                // listen for keyboard input from player
+                // (syncrhonous)
                 while (Console.KeyAvailable)
                 {
                     switch (Console.ReadKey(true).Key)
                     {
-                        case ConsoleKey.W: // forward
-                            bUp = true;
+                        case ConsoleKey.W:
+                            up = true;
                             break;
-                        case ConsoleKey.S: // backward
-                            bDown = true;
+                        case ConsoleKey.A:
+                            left = true;
                             break;
-                        case ConsoleKey.A: // left
-                            bLeft = true;
+                        case ConsoleKey.S:
+                            down = true;
                             break;
-                        case ConsoleKey.D: // right
-                            bRight = true;
+                        case ConsoleKey.D:
+                            right = true;
                             break;
-                        case ConsoleKey.Escape: // pause
-                            optExit();
+                        case ConsoleKey.Escape:
+                            bCloseRequest = true;
                             break;
                     }
                 }
-                // ties movement to ingame time
+
+                // timer to tie framerate to time instead of directly from thread speed
                 float fIngameTime = (float)stopwatch.Elapsed.TotalSeconds;
                 stopwatch.Restart();
+                
+                // use Window's API to get keyboard information directly from hardware
+                // asynchronous
+                if (OperatingSystem.IsWindows())
+                {
+                    up = up || Win.GetAsyncKeyState('W') is not 0; // forward
+                    down = down || Win.GetAsyncKeyState('S') is not 0; // backward
+                    left = left || Win.GetAsyncKeyState('A') is not 0; // left
+                    right = right || Win.GetAsyncKeyState('D') is not 0; // right
+                }
 
-                //--movement logic--
-                if (bUp && !bDown)
+                // movement logic
+                if (up && !down)
                 {
-                    fPlayerX += MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
-                    fPlayerY += MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
-                    if (map[(int)fPlayerY][(int)fPlayerX] == '#') // collision
+                    fPlayerX += MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
+                    fPlayerY += MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
+                    if (map[(int)fPlayerY][(int)fPlayerX] == '#')
                     {
-                        fPlayerX -= MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
-                        fPlayerY -= MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
+                        fPlayerX -= MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
+                        fPlayerY -= MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
                     }
                 }
-                if (bDown && !bUp)
+                if (down && !up)
                 {
-                    fPlayerX -= MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
-                    fPlayerY -= MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
-                    if (map[(int)fPlayerY][(int)fPlayerX] == '#') // collision
+                    fPlayerX -= MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
+                    fPlayerY -= MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
+                    if (map[(int)fPlayerY][(int)fPlayerX] == '#')
                     {
-                        fPlayerX += MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
-                        fPlayerY += MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
+                        fPlayerX += MathF.Cos(fPlayerA) * fSpeed * fIngameTime;
+                        fPlayerY += MathF.Sin(fPlayerA) * fSpeed * fIngameTime;
                     }
                 }
-                if (bLeft && !bRight)
+                if (left && !right)
                 {
                     fPlayerA -= fSpeed * fRotationSpeed * fIngameTime;
                     if (fPlayerA < 0)
                     {
-                        fPlayerA += MathF.PI * 2;
                         fPlayerA %= MathF.PI * 2;
+                        fPlayerA += MathF.PI * 2;
                     }
                 }
-                if (bRight && !bLeft)
+                if (right && !left)
                 {
                     fPlayerA += fSpeed * fRotationSpeed * fIngameTime;
-                    if (fPlayerA > Math.PI * 2)
+                    if (fPlayerA > MathF.PI * 2)
                     {
                         fPlayerA %= MathF.PI * 2;
                     }
                 }
-                void optExit()
-                {
-                    Console.Clear();
-                    Console.WriteLine("r u sure? (y/N)");
-                    ConsoleKeyInfo opt = Console.ReadKey(true);
-
-                    if (opt.Key is ConsoleKey.Y) bQuit = true;
-                }
             }
 
+            // render frame function
             // 90% of the raycasting tech goodness
-            void Render()
+            void E_RenderFrame()
             {
+                // sets default `depthBuffer` value
                 for (int y = 0; y < nScreenHeight; y++)
-                    for (int x = 0; x < nScreenHeight; x++) depthBuffer[x, y] = float.MaxValue;
+                    for (int x = 0; x < nScreenHeight; x++)
+                    {
+                        depthBuffer[x, y] = float.MaxValue;
+                    }
 
+                // per each character in console line
                 for (int x = 0; x < nScreenWidth; x++)
                 {
                     // For each column, calculate the projected ray angle into world space
-                    float fRayAngle =
-                        (fPlayerA - fFOV / 2.0f) + ((float)x / (float)nScreenWidth) * fFOV;
-
+                    float fRayAngle = (fPlayerA - fFOV / 2.0f) + ((float)x / (float)nScreenWidth) * fFOV;
                     float fDistanceToWall = 0;
                     bool bHitWall = false;
                     bool bBoundary = false;
 
-                    float fEyeX = MathF.Sin(fRayAngle); // Unit vector for ray in player space
-                    float fEyeY = MathF.Cos(fRayAngle);
+                    float fEyeX = MathF.Cos(fRayAngle);
+                    float fEyeY = MathF.Sin(fRayAngle);
+
                     while (!bHitWall && fDistanceToWall < fDepth)
                     {
                         fDistanceToWall += 0.1f;
@@ -290,15 +276,14 @@ namespace RaycasterCS
                         int nTestX = (int)(fPlayerX + fEyeX * fDistanceToWall);
                         int nTestY = (int)(fPlayerY + fEyeY * fDistanceToWall);
 
-                        // Test if ray is out of bounds
-                        if (nTestX < 0 || nTestX >= nMapWidth || nTestY < 0 || nTestY >= nMapHeight)
+                        // test if ray casted is out of bounds
+                        if (nTestY < 0 || nTestY >= nMapWidth || nTestY < 0 || nTestX >= nMapHeight)
                         {
-                            bHitWall = true; // Just set distance to max depth
+                            bHitWall = true;
                             fDistanceToWall = fDepth;
                         }
-                        else
+                        else // ray inbounds so test to see if the ray cell is a wall block
                         {
-                            // Ray is inbounds so test to see if the ray cell is a wall block
                             if (map[nTestY][nTestX] == '#')
                             {
                                 bHitWall = true;
@@ -314,146 +299,184 @@ namespace RaycasterCS
                                     }
                                 p.Sort((a, b) => a.Item1.CompareTo(b.Item1));
                                 float fBound = 0.01f;
-                                if (MathF.Acos(p[0].Item2) < fBound)
-                                    bBoundary = true;
-                                if (MathF.Acos(p[1].Item2) < fBound)
-                                    bBoundary = true;
-                                if (MathF.Acos(p[2].Item2) < fBound)
-                                    bBoundary = true;
+                                if (MathF.Acos(p[0].Item2) < fBound) bBoundary = true;
                             }
                         }
-                    }
-                    // calculate distance to ceiling and floor
-                    int nCeiling = (int)(
-                        (float)(nScreenHeight / 2.0) - nScreenHeight / ((float)fDistanceToWall)
-                    );
-                    int nFloor = nScreenHeight - nCeiling;
 
-                    char nShade = ' ';
-                    for (int y = 0; y < nScreenHeight; y++)
-                        depthBuffer[x, y] = fDistanceToWall;
+                        // caclulate distance to ceiling and floor
+                        int nCeiling = (int)((float)(nScreenHeight / 2.0f) - nScreenHeight / ((float)fDistanceToWall));
+                        int nFloor = nScreenHeight - nCeiling;
 
-                    // shading for walls
-                    if (fDistanceToWall <= fDepth / 4.0f)
-                        nShade = '█'; // nearest
-                    else if (fDistanceToWall < fDepth / 3.0f)
-                        nShade = '▓';
-                    else if (fDistanceToWall < fDepth / 2.0f)
-                        nShade = '▒';
-                    else if (fDistanceToWall < fDepth)
-                        nShade = '░';
-                    else
-                        nShade = ' '; // farthest
+                        char nShade = ' ';
 
-                    if (bBoundary)
-                        nShade = ' ';
+                        // shading for walls
+                        if (fDistanceToWall <= fDepth / 4.0f) nShade = '█'; // nearest
+                        else if (fDistanceToWall < fDepth / 3.0f) nShade = '▓';
+                        else if (fDistanceToWall < fDepth / 2.0f) nShade = '▒';
+                        else if (fDistanceToWall < fDepth) nShade = '░';
+                        else nShade = ' '; // farthest
 
-                    for (int y = 0; y < nScreenHeight; y++)
-                    {
-                        if (y <= nCeiling)
-                            screen[x, y] = ' ';
-                        else if (y > nCeiling && y <= nFloor)
-                            screen[x, y] = nShade;
-                        else
+                        if (bBoundary) nShade = ' ';
+
+                        for (int y = 0; y < nScreenHeight; y++)
                         {
-                            float b =
-                                1.0f
-                                - ((float)y - nScreenHeight / 2.0f) / ((float)nScreenHeight / 2.0f);
-                            if (b < 0.25)
-                                nShade = '#';
-                            else if (b < .5)
-                                nShade = 'x';
-                            else if (b < .75)
-                                nShade = '.';
-                            else if (b < .9)
-                                nShade = '-';
+                            depthBuffer[x, y] = fDistanceToWall;
+
+                            if (y <= nCeiling)
+                            {
+                                screen[x, y] = ' ';
+                            }
+                            else if (y > nCeiling && y <= nFloor)
+                            {
+                                screen[x, y] = nShade;
+                            }
                             else
-                                nShade = ' ';
-                            screen[x, y] = nShade;
+                            {
+                                float b = 1.0f - ((float)y - nScreenHeight / 2.0f) / ((float)nScreenHeight / 2.0f); if (b < 0.25) nShade = '#';
+                                else if (b < .5) nShade = 'x';
+                                else if (b < .75) nShade = '.';
+                                else if (b < .9) nShade = '-';
+                                else nShade = ' ';
+                                screen[x, y] = nShade;
+                            }
                         }
                     }
                 }
 
-                foreach (var statue in statue)
+                float fFOVAngle = fPlayerA - fFOV / 2;
+                if (fFOVAngle < 0) fFOVAngle += MathF.PI * 2;
+
+                // render statues
+                foreach (var statue in statues)
                 {
                     float fAngle = MathF.Atan2(statue.y - fPlayerY, statue.x - fPlayerX);
-                    float fovfAngleA = fPlayerA - fFOV / 2;
                     if (fAngle < 0) fAngle += 2f * MathF.PI;
 
-                    float fVecX = statue.x - fPlayerX;
-                    float fVecY = statue.y - fPlayerY;
-                    float fDistanceFromPlayer = MathF.Sqrt(fVecX * fVecX + fVecY * fVecY);
+                    float fDistance = Vector2.Distance(
+                      new(fPlayerX, fPlayerY), new(statue.x, statue.y));
 
-                    int nCeiling = (int)((float)(nScreenHeight / 2.0f) - nScreenHeight / ((float)fDistanceFromPlayer));
+                    int nCeiling = (int)((float)(nScreenHeight / 2.0f) - nScreenHeight / ((float)fDistance));
                     int nFloor = nScreenHeight - nCeiling;
 
-                    string[] statueSprite = spriteStatue;
+                    string[] statueSprite = statueSprite1;
 
-                    float fDiff = fAngle < fPlayerA && fovfAngleA - 2f * MathF.PI + fFOV > fAngle ?
-                      fAngle + 2f * (float)Math.PI - fovfAngleA : fAngle - fovfAngleA;
-
-                    float fRatio = fDiff / fFOV;
-                    int statueScreenX = (int)(nScreenWidth * fRatio);
+                    float diff = fAngle < fFOVAngle && fFOVAngle - 2f * MathF.PI + fFOV > fAngle ? fAngle + 2f * MathF.PI - fFOVAngle : fAngle - fFOVAngle;
+                    float ratio = diff / fFOV;
+                    int statueScreenX = (int)(nScreenWidth * ratio);
                     int statueScreenY = Math.Min(nFloor, screen.GetLength(1));
 
                     for (int y = 0; y < statueSprite.Length; y++)
+                    {
                         for (int x = 0; x < statueSprite[y].Length; x++)
                         {
-                            if (statueSprite[y][x] != '`')
+                            if (statueSprite[y][x] is not '`')
                             {
-                                int nScreenX = x - statueSprite[y].Length / 2 + statueScreenX;
-                                int nScreenY = y - statueSprite.Length + statueScreenY;
-                                if (0 <= nScreenX && nScreenX <= nScreenWidth - 1 &&
-                                    0 <= nScreenY && nScreenY <= nScreenHeight - 1 &&
-                                    depthBuffer[nScreenX, nScreenY] > fDistanceFromPlayer)
+                                int screenX = x - statueSprite[y].Length / 2 + statueScreenX;
+                                int screenY = y - statueSprite.Length + statueScreenY;
+                                if (0 <= screenX && screenX <= nScreenWidth - 1 && 0 <= screenY && screenY <= nScreenHeight - 1 && depthBuffer[screenX, screenY] > fDistance)
                                 {
-                                    screen[nScreenX, nScreenY] = statueSprite[y][x];
-                                    depthBuffer[nScreenX, nScreenY] = fDistanceFromPlayer;
+                                    screen[screenX, screenY] = statueSprite[y][x];
+                                    depthBuffer[screenX, screenY] = fDistance;
                                 }
                             }
                         }
+                    }
                 }
 
-                // display map and coord
-                if (bDisplayCoords)
+                // print debug mode (map, coord)
+                if (bForDevOnly)
                 {
-                    string[] debug = { $"x:{fPlayerX}", $"y:{fPlayerY}", $"a:{fPlayerA}" };
-                    for (int i = 0; i < debug.Length; i++)
-                        for (int j = 0; j < debug[i].Length; j++)
-                            screen[nScreenWidth - debug[i].Length + j, i] = debug[i][j];
+                    // coords
+                    string[] coords = [$"{fPlayerX}", $"{fPlayerY}", $"{fPlayerA}"];
+
+                    for (int i = 0; i < coords.Length; i++)
+                    {
+                        for (int j = 0; j < coords[i].Length; j++)
+                        {
+                            screen[nScreenWidth - coords[i].Length + j, i] = coords[i][j];
+                        }
+                    }
 
                     for (int y = 0; y < map.Length; y++)
+                    {
                         for (int x = 0; x < map[y].Length; x++)
+                        {
                             screen[x, y] = map[y][x];
-
+                        }
+                    }
                     screen[(int)fPlayerX, (int)fPlayerY] = 'P';
                 }
 
-                // display frame
+                // render frame
                 StringBuilder render = new();
                 for (int y = 0; y < screen.GetLength(1); y++)
                 {
+                    // render `screen` per line
                     for (int x = 0; x < screen.GetLength(0); x++)
                     {
-                        int c = ((nConsoleWidth - screen.GetLength(0)) / 2); // center
-                        if (x == 0)
-                            render.Append(' ', c);
+                        int center = ((nConsoleWidth - screen.GetLength(0)) / 2);
+                        if (x == 0) render.Append(' ', center); // center screen
+
+                        // render character
                         render.Append(screen[x, y]);
                     }
 
-                    if (y < screen.GetLength(1) - 1)
-                        render.AppendLine();
+                    // append after last char in console line
+                    if (y < screen.GetLength(1) - 1) render.AppendLine();
                 }
-                Console.CursorVisible = false;
                 Console.SetCursorPosition(0, 0);
-                Console.Write(render);
+                Console.Write(render); // voila!
             }
-        } // RaycasterCS.Engine.Start() method
 
-        partial class Win
-        {
-            [DllImport("User32.dll")]
-            internal static extern short GetAsyncKeyState(int vKey);
+            // handle invalid console size
+            void E_HandleConsoleSize()
+            {
+                while (true)
+                {
+                    // first, update console size if changed
+                    if (nConsoleWidth != Console.WindowWidth || nConsoleHeight != Console.WindowHeight)
+                    {
+                        Console.Clear();
+                        nConsoleWidth = Console.WindowWidth;
+                        nConsoleHeight = Console.WindowHeight;
+                    }
+
+                    // handle invalid console size
+                    bConsoleLargeEnough = nConsoleWidth >= nScreenWidth && nConsoleHeight >= nScreenHeight;
+
+                    // check if console size is large enough
+                    if (!bConsoleLargeEnough)
+                    {
+                        Console.SetCursorPosition(0, 0);
+                        Console.WriteLine("Console not large enough.");
+                        Console.WriteLine($"Current size: {nConsoleWidth}x{nConsoleHeight}");
+                        Console.WriteLine($"Minimum size: {nScreenWidth}x{nScreenHeight}");
+                    }
+                    else break;
+                }
+            }
+
+            void E_CloseRequest()
+            {
+                Console.Clear();
+                Console.WriteLine("r u sure? (y/N)"); // TODO: implement something better here
+
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.Y: bQuit = true; break;
+                    default: bQuit = false; break;
+                }
+            }
+
+            void E_GameOver()
+            {
+                // TODO: implement game over logic
+            }
         }
-    } // RaycasterCS.Engine() object
-} // RaycasterCS namespace
+    }
+    partial class Win
+    {
+        [DllImport("User32.dll")]
+        internal static extern short GetAsyncKeyState(int vKey);
+    }
+}
