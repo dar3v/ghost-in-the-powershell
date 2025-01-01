@@ -128,13 +128,11 @@ namespace Ghost_in_The_PowerShell
             int consoleHeight = Console.WindowHeight;
             int consoleWidth = Console.WindowWidth;
 
-            // Set how much space you want to move down (e.g., 5 lines down)
+            // Set how much space you want to move down (ex. 5 lines down or 5 lines up)
             int verticalOffset = 23; // Adjust this value to control how much lower the menu goes
 
             // Adjust the starting row for the menu to ensure the instructions and menu go down
             int startingRow = verticalOffset;
-
-            // Instructions to be displayed
             string[] instructs =
             {
                 "Use Up/Down arrows to navigate and Enter to select.\n",
@@ -153,7 +151,7 @@ namespace Ghost_in_The_PowerShell
                     $"Current size: {consoleWidth}x{consoleHeight}",
                 };
                 CWriteFunc.RenderCenteredStrings(sizeNotEnough);
-                return; // Exit the method early if size is insufficient
+                return; // exit the method early if size is insufficient
             }
 
             // Render the instructions with some vertical offset
@@ -167,7 +165,7 @@ namespace Ghost_in_The_PowerShell
             }
 
             // Move the menu items down a few rows, starting from the next line
-            int currentRow = startingRow + instructs.Length + 1; // Skip the instruction rows, add an extra line for spacing
+            int currentRow = startingRow + instructs.Length + 1; // will skip the instruction rows ig, add an extra line for spacing
 
             // Display menu items
             for (int i = 0; i < menuItems.Length; i++)
@@ -223,10 +221,6 @@ namespace Ghost_in_The_PowerShell
 
         private static void G_playGame()
         {
-            // Use the full width of the console
-            int width = Console.WindowWidth;
-            int height = Console.WindowHeight;
-
             // Set the desired speed (in milliseconds between blood fall)
             float fallingSpeedMilliseconds = 0.00f; // Adjust to control the speed
             if (bgPlayer != null)
@@ -244,8 +238,6 @@ namespace Ghost_in_The_PowerShell
 
         private static void G_aboutGame()
         {
-            // int consoleWidth = Console.WindowWidth;
-            int consoleHeight = Console.WindowHeight;
 
             Clear();
             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -308,36 +300,6 @@ namespace Ghost_in_The_PowerShell
             {
                 Console.ResetColor();
                 RunHomeMenu();
-            }
-        }
-
-        static void loadingBar() //added a loading in the start of the game
-        {
-            //setting the dimension of the console window
-            int consoleWidth = Console.WindowWidth;
-            int consoleHeight = Console.WindowHeight;
-
-            //calculation for the vertical center
-            int verticalCenter = (consoleHeight / 2) + 11;
-
-            //calculating the horizontal start position for centering the bar
-            int barWidth = 50;
-            int barStart = (consoleWidth - barWidth) / 2;
-
-            for (int i = 0; i <= barWidth; i++)
-            {
-                // calculate the horizontal position of the text
-                int progressBarStart = (consoleWidth - 8) / 2;
-
-                //sets the position of the cursor for the progress bar
-                Console.SetCursorPosition(barStart, verticalCenter);
-                System.Console.WriteLine(new string('█', i)); //drawing of the progress bar
-
-                //sets the position of the cursor for the progress bar percentage
-                Console.SetCursorPosition(progressBarStart, verticalCenter + 1);
-                System.Console.WriteLine($"{i * 2}/100");
-
-                Thread.Sleep(40); //will simulate the loading time
             }
         }
 
@@ -406,7 +368,7 @@ namespace Ghost_in_The_PowerShell
                     "░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░",
                 };
                 bgPlayer = new Player();
-                // Task loadingBarTask = Task.Run(() => loadingBar());
+                // Task loadingBarTask = Task.Run(() => loadingBar()); (this lambda expression is killing me)
 
                 bgPlayer.Play("./Files/ThudsoundTitle.wav");
                 CWriteFunc.RenderCenteredStrings(loadingWelcome, colors);
@@ -425,5 +387,35 @@ namespace Ghost_in_The_PowerShell
                 break;
             }
         }
+
+        // static void loadingBar() //added a loading in the start of the game
+        // {
+        //     //setting the dimension of the console window
+        //     int consoleWidth = Console.WindowWidth;
+        //     int consoleHeight = Console.WindowHeight;
+
+        //     //calculation for the vertical center
+        //     int verticalCenter = (consoleHeight / 2) + 11;
+
+        //     //calculating the horizontal start position for centering the bar
+        //     int barWidth = 50;
+        //     int barStart = (consoleWidth - barWidth) / 2;
+
+        //     for (int i = 0; i <= barWidth; i++)
+        //     {
+        //         // calculate the horizontal position of the text
+        //         int progressBarStart = (consoleWidth - 8) / 2;
+
+        //         //sets the position of the cursor for the progress bar
+        //         Console.SetCursorPosition(barStart, verticalCenter);
+        //         System.Console.WriteLine(new string('█', i)); //drawing of the progress bar
+
+        //         //sets the position of the cursor for the progress bar percentage
+        //         Console.SetCursorPosition(progressBarStart, verticalCenter + 1);
+        //         System.Console.WriteLine($"{i * 2}/100");
+
+        //         Thread.Sleep(40); //will simulate the loading time
+        //     }
+        // }
     }
 }

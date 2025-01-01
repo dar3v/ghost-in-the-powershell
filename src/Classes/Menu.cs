@@ -10,13 +10,11 @@ namespace WriteFunc
         public static void FallingBloodTransition(float fallingSpeedMilliseconds)
         {
             Random random = new Random();
-            Console.CursorVisible = false; // Hide the cursor for a cleaner effect
-
-            // Dynamically get the current console dimensions
+            Console.CursorVisible = false; 
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
 
-            // Create an array to track where blood has "landed" for each column
+            // array to track where blood has "landed" for each column
             int[] bloodHeight = new int[width];
 
             // Initialize the stopwatch to measure time
@@ -25,30 +23,29 @@ namespace WriteFunc
 
             while (true)
             {
-                // Dynamically update the console dimensions in case of resizing
+                // update the console dimensions in case of resizing
                 width = Console.WindowWidth;
                 height = Console.WindowHeight;
 
-                // Adjust the bloodHeight array if the console width changes
+                // will adjust the bloodHeight array if the console width changes
                 if (bloodHeight.Length != width)
                 {
                     Array.Resize(ref bloodHeight, width);
                 }
 
-                // Only update once the specified time has passed
+                // update once a specied time passed
                 if (stopwatch.ElapsedMilliseconds >= fallingSpeedMilliseconds)
                 {
                     // Randomly select a column for the falling blood
                     int col = random.Next(width);
 
-                    // If the column hasn't reached the bottom, let the blood "fall"
+                    // let the blood fall when the bottom has not been reached yet
                     if (bloodHeight[col] < height)
                     {
                         Console.SetCursorPosition(col, bloodHeight[col]);
-                        Console.ForegroundColor = ConsoleColor.DarkRed; // Initial color of blood
+                        Console.ForegroundColor = ConsoleColor.DarkRed; 
                         Console.Write("█");
 
-                        // Increment the height for this column
                         bloodHeight[col]++;
                     }
 
@@ -90,14 +87,14 @@ namespace WriteFunc
                     );
                     Console.Clear();
 
-                    // Add vertical padding to center the text vertically
+                    //for vertical padding
                     Console.WriteLine(new string('\n', verticalOffset));
 
                     for (int i = 0; i < titlePrompt.Length; i++)
                     {
                         if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
                         {
-                            // If Enter is pressed, print all lines instantly
+                            // if Enter is pressed, print all lines instantly
                             Console.Clear();
                             Console.WriteLine(new string('\n', verticalOffset));
 
@@ -124,7 +121,7 @@ namespace WriteFunc
                                 && Console.ReadKey(true).Key == ConsoleKey.Enter
                             )
                             {
-                                // If Enter is pressed mid-line, print remaining lines instantly
+                                // enter is pressed mid-line, print remaining lines instantly
                                 Console.Clear();
                                 Console.WriteLine(new string('\n', verticalOffset));
 
@@ -173,7 +170,7 @@ namespace WriteFunc
             int lastWidth = Console.WindowWidth;
             int lastHeight = Console.WindowHeight;
 
-            Random random = new Random(); // Random object to generate random colors
+            Random random = new Random(); // random object to generate random colors
 
             while (true)
             {
@@ -202,10 +199,10 @@ namespace WriteFunc
                         int horizontalOffset = Math.Max(0, (currentWidth - line.Length) / 2);
                         render.Append(' ', horizontalOffset);
 
-                        // Loop through each character in the line
+                        // will loop through each character in the line
                         for (int charIndex = 0; charIndex < line.Length; charIndex++)
                         {
-                            // Generate a random color for each character
+                            //generate a random color for the ascii art
                             ConsoleColor randomColor = (ConsoleColor)
                                 random.Next(1, Enum.GetValues(typeof(ConsoleColor)).Length);
 
@@ -218,8 +215,8 @@ namespace WriteFunc
                     }
 
                     Console.SetCursorPosition(0, 0);
-                    Console.Write(render.ToString()); // Output the built string to the console
-                    Console.ResetColor(); // Reset to default console color
+                    Console.Write(render.ToString()); 
+                    Console.ResetColor(); 
                     break;
                 }
                 else
@@ -296,13 +293,13 @@ namespace WriteFunc
 
         //     while (true)
         //     {
-        //         // Only update once the specified time has passed
+        //         
         //         if (stopwatch.ElapsedMilliseconds >= fallingSpeedMilliseconds)
         //         {
-        //             // Randomly select a column for the falling blood
+ 
         //             int col = random.Next(width);
 
-        //             // If the column hasn't reached the bottom, let the blood "fall"
+        //   
         //             if (bloodHeight[col] < height)
         //             {
         //                 Console.SetCursorPosition(col, bloodHeight[col]);
@@ -317,7 +314,7 @@ namespace WriteFunc
         //             stopwatch.Restart();
         //         }
 
-        //         // Break when all columns are full
+        
         //         if (Array.TrueForAll(bloodHeight, h => h >= height))
         //         {
         //             break;
@@ -325,7 +322,7 @@ namespace WriteFunc
         //     }
 
         //     Console.ResetColor();
-        //     Console.CursorVisible = true; // Restore cursor visibility
+        //     Console.CursorVisible = true; 
         // }
 
         //NOTE: Comment cuz yeh, just made a new centering method that is responsive
