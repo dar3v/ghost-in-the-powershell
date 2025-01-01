@@ -6,6 +6,12 @@ find the statue in each 3 levels to finish the game. Do it before the timer howe
 
 huge shoutout to [javidx9](https://www.youtube.com/@javidx9) for his youtube video tutorial on the ray caster inspired from *Wolfenstein* in the commandline, originally written in C++. [video link](https://www.youtube.com/watch?v=xW8skO7MFYw).
 
+> [!NOTE]
+>
+> Documentation not at a **finished state** yet.
+> 
+> But for basic modifications this should do the job.
+
 # Getting Started
 head to the [table of contents](#table-of-contents) to get started
 
