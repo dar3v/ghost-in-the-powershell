@@ -27,13 +27,18 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx████  ████�
 
 # Table of Contents
 - [About](#about)
+- [Documentation](#documentation)
 - [Installation](#installation)
-- [Credits](#credits)
+- [Credits](#credits-)
 
 ## About
-**GHOST in the POWERSHELL** is a 3D Maze Command-Line Game made possible with the ray casting tech inspired from classic games like *Wolfenstein* and *DOOM*.
+**GHOST in the POWERSHELL** is a 3D Maze Command-Line Game made possible with the ray casting tech inspired from classic games like *[Wolfenstein](https://en.wikipedia.org/wiki/Wolfenstein_3D#Development)* and *[DOOM](https://en.wikipedia.org/wiki/Doom_(1993_video_game))*.
 
 find the statue in each 3 levels to finish the game. Do it before the timer however, because if your time is out, its game over! 👻
+
+## Documentation
+- documentation is available at `docs/`.
+- [click this](./docs/Docs.md) to view the documentation for this code.
 
 ## Installation
 
@@ -42,6 +47,8 @@ find the statue in each 3 levels to finish the game. Do it before the timer howe
 
 before all else, make sure you have dotnet ≥ v8.0 installed for your system already.
 [dotnet 8.0 link](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+
+(also, im not sure if dotnet 9.0 works, but it should i believe)
 
 ## From source
   - Clone the repository.
@@ -61,6 +68,10 @@ $ cd src/
   # run the program
   $ dotnet run
   ```
+- or, running the program through your IDE should also work. Just make sure you're in the `src/` path.
+
+ ## precompiled binaries
+- a `.exe` file is planned to be released soon.
 
 </details>
 
@@ -102,6 +113,7 @@ $ cd src/
   # run the program
   $ dotnet run
   ```
+- or, running the program through your IDE should also work. Just make sure you're in the `src/` path.
 </details>
 
 ## Contributing (?)
