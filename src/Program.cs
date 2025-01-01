@@ -1,33 +1,32 @@
-using static System.Console;
-using WriteFunc;
-using NetCoreAudio;
 using MazeGame;
+using NetCoreAudio;
+using WriteFunc;
+using static System.Console;
 
 namespace Ghost_in_The_PowerShell
 {
     internal class Program
     {
         static string[] prompt =
-            {
-                "  ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ██▓ ███▄    █    ▄▄▄█████▓ ██░ ██ ▓█████   ",
-                "██▒ ▀█▒▓██░ ██▒▒██▒  ██▒▒██    ▒ ▓  ██▒ ▓▒    ▓██▒ ██ ▀█   █    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀",
-                "▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ▒██▒▓██  ▀█ ██▒   ▒ ▓██░ ▒░▒██▀▀██░▒███   ",
-                "▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ░██░▓██▒  ▐▌██▒   ░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄ ",
-                "░▓█  ██▓░▓█ ░██ ▒██   ██░  ▒   ██▒░ ▓██▓ ░     ░██░▒██░   ▓██░     ▒██▒ ░ ░▓█▒░██▓░▒████▒",
-                "░▒▓███▀▒░▓█▒░██▓░ ████▓▒░▒██████▒▒  ▒██▒ ░     ░▓  ░ ▒░   ▒ ▒      ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░",
-                " ░▒   ▒  ▒ ░░▒░▒░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░  ▒ ░░        ▒ ░░ ░░   ░ ▒░       ░     ▒ ░▒░ ░ ░ ░  ░",
-                "  ░   ░  ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░▒  ░ ░    ░         ▒ ░   ░   ░ ░      ░       ░  ░░ ░   ░   ",
-                "░ ░   ░  ░  ░░ ░░ ░ ░ ▒  ░  ░  ░     ░                    ░              ░  ░  ░   ░  ",
-                "   ██▓███   ▒█████   █     █░▓█████  ██▀███    ██████  ██░ ██ ▓█████  ██▓     ██▓    ",
-                "▓██░  ██▒▒██▒  ██▒▓█░ █ ░█░▓█   ▀ ▓██ ▒ ██▒▒██    ▒ ▓██░ ██▒▓█   ▀ ▓██▒    ▓██▒    ",
-                "▓██░ ██▓▒▒██░  ██▒▒█░ █ ░█ ▒███   ▓██ ░▄█ ▒░ ▓██▄   ▒██▀▀██░▒███   ▒██░    ▒██░    ",
-                "▒██▄█▓▒ ▒▒██   ██░░█░ █ ░█ ▒▓█  ▄ ▒██▀▀█▄    ▒   ██▒░▓█ ░██ ▒▓█  ▄ ▒██░    ▒██░    ",
-                "▒██▒ ░  ░░ ████▓▒░░░██▒██▓ ░▒████▒░██▓ ▒██▒▒██████▒▒░▓█▒░██▓░▒████▒░██████▒░██████▒",
-                "▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  ░░ ▒░ ░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░",
-                "░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   ",
-                "░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░",
-
-            };
+        {
+            "  ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ██▓ ███▄    █    ▄▄▄█████▓ ██░ ██ ▓█████   ",
+            "██▒ ▀█▒▓██░ ██▒▒██▒  ██▒▒██    ▒ ▓  ██▒ ▓▒    ▓██▒ ██ ▀█   █    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀",
+            "▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ▒██▒▓██  ▀█ ██▒   ▒ ▓██░ ▒░▒██▀▀██░▒███   ",
+            "▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░    ░██░▓██▒  ▐▌██▒   ░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄ ",
+            "░▓█  ██▓░▓█ ░██ ▒██   ██░  ▒   ██▒░ ▓██▓ ░     ░██░▒██░   ▓██░     ▒██▒ ░ ░▓█▒░██▓░▒████▒",
+            "░▒▓███▀▒░▓█▒░██▓░ ████▓▒░▒██████▒▒  ▒██▒ ░     ░▓  ░ ▒░   ▒ ▒      ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░",
+            " ░▒   ▒  ▒ ░░▒░▒░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░  ▒ ░░        ▒ ░░ ░░   ░ ▒░       ░     ▒ ░▒░ ░ ░ ░  ░",
+            "  ░   ░  ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░▒  ░ ░    ░         ▒ ░   ░   ░ ░      ░       ░  ░░ ░   ░   ",
+            "░ ░   ░  ░  ░░ ░░ ░ ░ ▒  ░  ░  ░     ░                    ░              ░  ░  ░   ░  ",
+            "   ██▓███   ▒█████   █     █░▓█████  ██▀███    ██████  ██░ ██ ▓█████  ██▓     ██▓    ",
+            "▓██░  ██▒▒██▒  ██▒▓█░ █ ░█░▓█   ▀ ▓██ ▒ ██▒▒██    ▒ ▓██░ ██▒▓█   ▀ ▓██▒    ▓██▒    ",
+            "▓██░ ██▓▒▒██░  ██▒▒█░ █ ░█ ▒███   ▓██ ░▄█ ▒░ ▓██▄   ▒██▀▀██░▒███   ▒██░    ▒██░    ",
+            "▒██▄█▓▒ ▒▒██   ██░░█░ █ ░█ ▒▓█  ▄ ▒██▀▀█▄    ▒   ██▒░▓█ ░██ ▒▓█  ▄ ▒██░    ▒██░    ",
+            "▒██▒ ░  ░░ ████▓▒░░░██▒██▓ ░▒████▒░██▓ ▒██▒▒██████▒▒░▓█▒░██▓░▒████▒░██████▒░██████▒",
+            "▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  ░░ ▒░ ░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░",
+            "░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   ",
+            "░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░",
+        };
         static string[] menuItems = { "Play", " About", "Exit" };
         static int selectedIndex = 0;
         static int previousConsoleWidth = Console.BufferWidth;
@@ -124,14 +123,13 @@ namespace Ghost_in_The_PowerShell
             }
         }
 
-
         static void DisplayMenu()
         {
             int consoleHeight = Console.WindowHeight;
             int consoleWidth = Console.WindowWidth;
 
             // Set how much space you want to move down (e.g., 5 lines down)
-            int verticalOffset = 23;  // Adjust this value to control how much lower the menu goes
+            int verticalOffset = 23; // Adjust this value to control how much lower the menu goes
 
             // Adjust the starting row for the menu to ensure the instructions and menu go down
             int startingRow = verticalOffset;
@@ -141,45 +139,46 @@ namespace Ghost_in_The_PowerShell
             {
                 "Use Up/Down arrows to navigate and Enter to select.\n",
                 "\n",
-                "=== Main Menu ===\n"
+                "=== Main Menu ===\n",
             };
 
             if (consoleWidth < 125 || consoleHeight < 40)
+            {
+                Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                string[] sizeNotEnough =
                 {
-                    Console.Clear();
-                    Console.SetCursorPosition(0, 0);
-                    string[] sizeNotEnough = 
-                    {
                     "Console Size Not Large Enough.",
                     "Minimum size: 125x40",
-                    $"Current size: {consoleWidth}x{consoleHeight}"
-                    };
-                    CWriteFunc.RenderCenteredStrings(sizeNotEnough);
-                    return; // Exit the method early if size is insufficient
-                }
+                    $"Current size: {consoleWidth}x{consoleHeight}",
+                };
+                CWriteFunc.RenderCenteredStrings(sizeNotEnough);
+                return; // Exit the method early if size is insufficient
+            }
 
             // Render the instructions with some vertical offset
             for (int i = 0; i < instructs.Length; i++)
             {
-                Console.SetCursorPosition((consoleWidth - instructs[i].Length) / 2, startingRow + i);  // Centered text with offset
+                Console.SetCursorPosition(
+                    (consoleWidth - instructs[i].Length) / 2,
+                    startingRow + i
+                ); // Centered text with offset
                 Console.WriteLine(instructs[i]);
             }
 
             // Move the menu items down a few rows, starting from the next line
-            int currentRow = startingRow + instructs.Length + 1;  // Skip the instruction rows, add an extra line for spacing
+            int currentRow = startingRow + instructs.Length + 1; // Skip the instruction rows, add an extra line for spacing
 
             // Display menu items
             for (int i = 0; i < menuItems.Length; i++)
             {
                 string menuItem = menuItems[i];
-                string menuText = i == selectedIndex
-                    ? $" >> {menuItem} << "
-                    : $"   {menuItem}   ";
+                string menuText = i == selectedIndex ? $" >> {menuItem} << " : $"   {menuItem}   ";
 
                 int padding = Math.Max(0, (consoleWidth - menuText.Length) / 2);
 
                 // Set the cursor position for the menu item and print it
-                Console.SetCursorPosition(padding, currentRow + i);  // Positioning each menu item lower on the screen
+                Console.SetCursorPosition(padding, currentRow + i); // Positioning each menu item lower on the screen
 
                 if (i == selectedIndex)
                 {
@@ -190,7 +189,6 @@ namespace Ghost_in_The_PowerShell
                 Console.ResetColor();
             }
         }
-
 
         static void HandleMenuSelection(ref bool running)
         {
@@ -207,6 +205,7 @@ namespace Ghost_in_The_PowerShell
                     break;
             }
         }
+
         static void MonitorResize()
         {
             while (true)
@@ -230,14 +229,16 @@ namespace Ghost_in_The_PowerShell
 
             // Set the desired speed (in milliseconds between blood fall)
             float fallingSpeedMilliseconds = 0.00f; // Adjust to control the speed
-            if (bgPlayer != null) bgPlayer.Stop();
+            if (bgPlayer != null)
+                bgPlayer.Stop();
             ScaryMaze Maze = new();
             CWriteFunc.FallingBloodTransition(fallingSpeedMilliseconds);
 
             Console.Clear();
             Maze.GameStart();
 
-            if (bgPlayer != null) bgPlayer.Play("./Files/HomeMenubg.wav");
+            if (bgPlayer != null)
+                bgPlayer.Play("./Files/HomeMenubg.wav");
             // RunHomeMenu();
         }
 
@@ -249,28 +250,27 @@ namespace Ghost_in_The_PowerShell
             Clear();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             string[] aboutInfo =
-                {
-                    "┏┓┳┓┏┓┳┳┏┳┓",
-                    "┣┫┣┫┃┃┃┃ ┃ ",
-                    "┛┗┻┛┗┛┗┛ ┻ ",
-                    "\n",
-                    "This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.",
-                    "\n",
-                    "The Team consists of Students From BSCS 1B:",
-                    "\"Ezekiel Viray\"",
-                    "\"Dan Rev Paco\"",
-                    "\"John Wayne Capistrano\"",
-                    "\n",
-                    "Through this project, the developers aim to apply and showcase the fundamental programming",
-                    "concepts learned throughout their course. This marks an important milestone in their academic",
-                    "journey as they work together to build a functional application while adhering to best practices in software development.",
-
-                };
+            {
+                "┏┓┳┓┏┓┳┳┏┳┓",
+                "┣┫┣┫┃┃┃┃ ┃ ",
+                "┛┗┻┛┗┛┗┛ ┻ ",
+                "\n",
+                "This Project is Developed by a Group of Computer Science Students as part of their Final Requirement in the Fundamentals of Programming Course.",
+                "\n",
+                "The Team consists of Students From BSCS 1B:",
+                "\"Ezekiel Viray\"",
+                "\"Dan Rev Paco\"",
+                "\"John Wayne Capistrano\"",
+                "\n",
+                "Through this project, the developers aim to apply and showcase the fundamental programming",
+                "concepts learned throughout their course. This marks an important milestone in their academic",
+                "journey as they work together to build a functional application while adhering to best practices in software development.",
+            };
             CWriteFunc.RenderCenteredStrings(aboutInfo);
 
-            ReadKey(true);  // Wait for key press to proceed
+            ReadKey(true); // Wait for key press to proceed
             Console.ResetColor();
-            RunHomeMenu();  // Navigate back to the home menu (if needed)
+            RunHomeMenu(); // Navigate back to the home menu (if needed)
         }
 
         private static void G_exitGame()
@@ -278,19 +278,19 @@ namespace Ghost_in_The_PowerShell
             Clear();
             ForegroundColor = ConsoleColor.DarkRed;
             string[] exitInfo =
-                {
-                    "░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░ ▒▓████████▓▒░ ",
-                    "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
-                    "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
-                    "░▒▓██████▓▒░    ░▒▓██████▓▒░  ░▒▓█▓▒░    ░▒▓█▓▒░     ",
-                    "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
-                    "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
-                    "░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
-                    "\n",
-                    "\n",
-                    "Are You Sure You Want To Exit?",
-                    "If So, Press Enter Key To Escape Your Impending Doom!",
-                };
+            {
+                "░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░ ▒▓████████▓▒░ ",
+                "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
+                "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
+                "░▒▓██████▓▒░    ░▒▓██████▓▒░  ░▒▓█▓▒░    ░▒▓█▓▒░     ",
+                "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
+                "░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
+                "░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░    ░▒▓█▓▒░     ",
+                "\n",
+                "\n",
+                "Are You Sure You Want To Exit?",
+                "If So, Press Enter Key To Escape Your Impending Doom!",
+            };
 
             CWriteFunc.RenderCenteredStrings(exitInfo);
 
@@ -309,7 +309,6 @@ namespace Ghost_in_The_PowerShell
                 Console.ResetColor();
                 RunHomeMenu();
             }
-
         }
 
         static void loadingBar() //added a loading in the start of the game
@@ -330,7 +329,7 @@ namespace Ghost_in_The_PowerShell
                 // calculate the horizontal position of the text
                 int progressBarStart = (consoleWidth - 8) / 2;
 
-                //sets the position of the cursor for the progress bar                
+                //sets the position of the cursor for the progress bar
                 Console.SetCursorPosition(barStart, verticalCenter);
                 System.Console.WriteLine(new string('█', i)); //drawing of the progress bar
 
@@ -341,12 +340,17 @@ namespace Ghost_in_The_PowerShell
                 Thread.Sleep(40); //will simulate the loading time
             }
         }
+
         static void gamestartLoading()
         {
             ConsoleColor[] colors = new ConsoleColor[]
             {
-                ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue,
-                ConsoleColor.Cyan, ConsoleColor.Yellow, ConsoleColor.Magenta
+                ConsoleColor.Red,
+                ConsoleColor.Green,
+                ConsoleColor.Blue,
+                ConsoleColor.Cyan,
+                ConsoleColor.Yellow,
+                ConsoleColor.Magenta,
             };
             while (true)
             {
@@ -363,7 +367,7 @@ namespace Ghost_in_The_PowerShell
                     "▐░▌▐░▌ ▐░▌▐░▌▐░▌          ▐░▌          ▐░▌          ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌          ",
                     "▐░▌░▌   ▐░▐░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░█▄▄▄▄▄▄▄▄▄ ",
                     "▐░░▌     ▐░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌",
-                    " ▀▀       ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀ "
+                    " ▀▀       ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀ ",
                 };
 
                 string[] loadingTo =
@@ -378,7 +382,7 @@ namespace Ghost_in_The_PowerShell
                     "     ▐░▌     ▐░▌       ▐░▌",
                     "     ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌",
                     "     ▐░▌     ▐░░░░░░░░░░░▌",
-                    "      ▀       ▀▀▀▀▀▀▀▀▀▀▀ "
+                    "      ▀       ▀▀▀▀▀▀▀▀▀▀▀ ",
                 };
 
                 string[] prompt =
@@ -400,7 +404,6 @@ namespace Ghost_in_The_PowerShell
                     "▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▓░▒ ▒  ░░ ▒░ ░░ ▒▓ ░▒▓░▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒░░ ▒░ ░░ ▒░▓  ░░ ▒░▓  ░",
                     "░░       ░ ░ ░ ▒    ░   ░     ░     ░░   ░ ░  ░  ░   ░  ░░ ░   ░     ░ ░     ░ ░   ",
                     "░ ░      ░       ░  ░   ░           ░   ░  ░  ░   ░  ░    ░  ░    ░  ░",
-
                 };
                 bgPlayer = new Player();
                 // Task loadingBarTask = Task.Run(() => loadingBar());

@@ -1,7 +1,7 @@
+using NAudio.Wave;
+using NetCoreAudio;
 using RaycasterCS;
 using WriteFunc;
-using NetCoreAudio;
-using NAudio.Wave;
 
 namespace MazeGame
 {
@@ -38,8 +38,16 @@ namespace MazeGame
                 int result = engine.Start();
 
                 // Check the result immediately
-                if (result == 0) { bQuit = true; break; } // Exit the loop if quitting 
-                else if (result == 1) { bGameOver = true; break; } // Exit the loop if game over
+                if (result == 0)
+                {
+                    bQuit = true;
+                    break;
+                } // Exit the loop if quitting
+                else if (result == 1)
+                {
+                    bGameOver = true;
+                    break;
+                } // Exit the loop if game over
                 else if (result == 2)
                 {
                     // Level completed, check if there are more levels
@@ -49,7 +57,8 @@ namespace MazeGame
                         Menu.NextLevelMenu(nCurrentLevel);
                         continue; // Continue to the next level
                     }
-                    else break; // Exit the loop to finish the game
+                    else
+                        break; // Exit the loop to finish the game
                 }
             }
             // stop game bg
@@ -57,9 +66,12 @@ namespace MazeGame
             WinGameMusic.Dispose();
 
             // Handle end of game scenarios
-            if (bGameOver) Menu.GameOver();
-            else if (bQuit) return; // Quit
-            else Menu.GameFinish(); // Game finished successfully
+            if (bGameOver)
+                Menu.GameOver();
+            else if (bQuit)
+                return; // Quit
+            else
+                Menu.GameFinish(); // Game finished successfully
         }
 
         // --- initialize level variables ---
@@ -70,23 +82,24 @@ namespace MazeGame
         {
             if (level == 1) // level one
             {
-                InitGame.MazeMap = [
-    "###############",
-    "#P.....@..#...#",
-    "#.........#...#",
-    "#####.....##..#",
-    "###.....###...#",
-    "#........###..#",
-    "######.....#..#",
-    "####......@#..#",
-    "####.......#..#",
-    "#####....######",
-    "####.....#..@.#",
-    "####..####....#",
-    "###...#.......#",
-    "###...........#",
-    "###############",
-            ];
+                InitGame.MazeMap =
+                [
+                    "###############",
+                    "#P.....@..#...#",
+                    "#.........#...#",
+                    "#####.....##..#",
+                    "###.....###...#",
+                    "#........###..#",
+                    "######.....#..#",
+                    "####......@#..#",
+                    "####.......#..#",
+                    "#####....######",
+                    "####.....#..@.#",
+                    "####..####....#",
+                    "###...#.......#",
+                    "###...........#",
+                    "###############",
+                ];
 
                 InitGame.initMazeTime = 45;
 
@@ -98,29 +111,29 @@ namespace MazeGame
             }
             else if (level == 2) // level two
             {
-
-                InitGame.MazeMap = [
-    "####################",
-    "#..P...#####.......#",
-    "#.........##.......#",
-    "#####......#########",
-    "#.........##.......#",
-    "#.@.......##.......#",
-    "#.......####.......#",
-    "#....####..##......#",
-    "#...#####...##.....#",
-    "#..###########.....#",
-    "#...########.......#",
-    "#........#####.....#",
-    "#..#...@...###.#####",
-    "#..##......#####...#",
-    "#..######....#######",
-    "#..#..@.#....#####.#",
-    "#..#....###........#",
-    "#..#...####...######",
-    "#..#............####",
-    "####################",
-            ];
+                InitGame.MazeMap =
+                [
+                    "####################",
+                    "#..P...#####.......#",
+                    "#.........##.......#",
+                    "#####......#########",
+                    "#.........##.......#",
+                    "#.@.......##.......#",
+                    "#.......####.......#",
+                    "#....####..##......#",
+                    "#...#####...##.....#",
+                    "#..###########.....#",
+                    "#...########.......#",
+                    "#........#####.....#",
+                    "#..#...@...###.#####",
+                    "#..##......#####...#",
+                    "#..######....#######",
+                    "#..#..@.#....#####.#",
+                    "#..#....###........#",
+                    "#..#...####...######",
+                    "#..#............####",
+                    "####################",
+                ];
 
                 InitGame.initMazeTime = 55;
 
@@ -132,33 +145,34 @@ namespace MazeGame
             }
             else if (level == 3) // level three
             {
-                InitGame.MazeMap = [
-    "#########################",
-    "#.P..............####...#",
-    "#...#########..@.####...#",
-    "#..##########....####...#",
-    "###########......##.....#",
-    "#####...........##......#",
-    "####...........##....#..#",
-    "#####..........#.....#..#",
-    "#############..#######..#",
-    "###.....#####...#########",
-    "##.............##########",
-    "#######........#######..#",
-    "#..######......#.....#..#",
-    "#..#...........#..@..#..#",
-    "#.......................#",
-    "#.......................#",
-    "####....#....####....####",
-    "#.....#####.....#.......#",
-    "#..###########..#.#.....#",
-    "#.....######....####....#",
-    "#########....@...##..####",
-    "#.......#........#......#",
-    "#.......#.....#########.#",
-    "#.......#...............#",
-    "#########################",
-            ];
+                InitGame.MazeMap =
+                [
+                    "#########################",
+                    "#.P..............####...#",
+                    "#...#########..@.####...#",
+                    "#..##########....####...#",
+                    "###########......##.....#",
+                    "#####...........##......#",
+                    "####...........##....#..#",
+                    "#####..........#.....#..#",
+                    "#############..#######..#",
+                    "###.....#####...#########",
+                    "##.............##########",
+                    "#######........#######..#",
+                    "#..######......#.....#..#",
+                    "#..#...........#..@..#..#",
+                    "#.......................#",
+                    "#.......................#",
+                    "####....#....####....####",
+                    "#.....#####.....#.......#",
+                    "#..###########..#.#.....#",
+                    "#.....######....####....#",
+                    "#########....@...##..####",
+                    "#.......#........#......#",
+                    "#.......#.....#########.#",
+                    "#.......#...............#",
+                    "#########################",
+                ];
 
                 InitGame.initMazeTime = 75;
 
@@ -170,33 +184,34 @@ namespace MazeGame
             }
             else if (level == 4) // level four
             {
-                InitGame.MazeMap = [
-    "#########################",
-    "#...............#####...#",
-    "#.P................##...#",
-    "#....#########......#...#",
-    "###########..###....#####",
-    "#.......#######......####",
-    "#.@.............@...##..#",
-    "#.............#######...#",
-    "############..#####.##..#",
-    "#########.....##.....####",
-    "######........#.......###",
-    "##.....................##",
-    "##.@........###......@.##",
-    "##.........####........##",
-    "###...#############...###",
-    "###################...###",
-    "##.....####.....###..####",
-    "#...@...##....#####..####",
-    "#.......#######.......###",
-    "#.....................###",
-    "###.......##...........##",
-    "#####.....#####......@.##",
-    "######......##.........##",
-    "######.............######",
-    "#########################",
-            ];
+                InitGame.MazeMap =
+                [
+                    "#########################",
+                    "#...............#####...#",
+                    "#.P................##...#",
+                    "#....#########......#...#",
+                    "###########..###....#####",
+                    "#.......#######......####",
+                    "#.@.............@...##..#",
+                    "#.............#######...#",
+                    "############..#####.##..#",
+                    "#########.....##.....####",
+                    "######........#.......###",
+                    "##.....................##",
+                    "##.@........###......@.##",
+                    "##.........####........##",
+                    "###...#############...###",
+                    "###################...###",
+                    "##.....####.....###..####",
+                    "#...@...##....#####..####",
+                    "#.......#######.......###",
+                    "#.....................###",
+                    "###.......##...........##",
+                    "#####.....#####......@.##",
+                    "######......##.........##",
+                    "######.............######",
+                    "#########################",
+                ];
                 InitGame.initMazeTime = 75;
 
                 InitGame.initMapWidth = InitGame.MazeMap[0].Length; // lmao
@@ -207,33 +222,34 @@ namespace MazeGame
             }
             else if (level == 5) // level five
             {
-                InitGame.MazeMap = [
-    "#########################",
-    "#........########.......#",
-    "#.P............##.......#",
-    "#...............#########",
-    "###########..@..#...@..##",
-    "#.@.##..........##.....##",
-    "#....##..........#......#",
-    "#.....##................#",
-    "#................###...##",
-    "#######.#..##..####....##",
-    "######..###########..####",
-    "####....########......###",
-    "###......######........##",
-    "##......#...@..#......###",
-    "#......##.......###..####",
-    "#......#..#.....###...###",
-    "##....#...###.....#...###",
-    "##....#...#####......####",
-    "##.........#........#####",
-    "#.................#######",
-    "########............#####",
-    "#######....#......@..####",
-    "######...@.##.......#####",
-    "###........####...#######",
-    "#########################",
-            ];
+                InitGame.MazeMap =
+                [
+                    "#########################",
+                    "#........########.......#",
+                    "#.P............##.......#",
+                    "#...............#########",
+                    "###########..@..#...@..##",
+                    "#.@.##..........##.....##",
+                    "#....##..........#......#",
+                    "#.....##................#",
+                    "#................###...##",
+                    "#######.#..##..####....##",
+                    "######..###########..####",
+                    "####....########......###",
+                    "###......######........##",
+                    "##......#...@..#......###",
+                    "#......##.......###..####",
+                    "#......#..#.....###...###",
+                    "##....#...###.....#...###",
+                    "##....#...#####......####",
+                    "##.........#........#####",
+                    "#.................#######",
+                    "########............#####",
+                    "#######....#......@..####",
+                    "######...@.##.......#####",
+                    "###........####...#######",
+                    "#########################",
+                ];
                 InitGame.initMazeTime = 75;
 
                 InitGame.initMapWidth = InitGame.MazeMap[0].Length; // lmao
@@ -242,7 +258,8 @@ namespace MazeGame
                 InitGame.initPlayerX = 2;
                 InitGame.initPlayerY = 2;
             }
-            else Console.WriteLine("not a level yet. check `nMaxLevels` value in MazeGame.cs");
+            else
+                Console.WriteLine("not a level yet. check `nMaxLevels` value in MazeGame.cs");
         }
     }
 
@@ -252,6 +269,7 @@ namespace MazeGame
     {
         public static Player? bgPlayer;
         public static Player? introSound;
+
         internal static void gameIntroLore()
         {
             string[] intro =
@@ -260,7 +278,7 @@ namespace MazeGame
                 "surrounding a derelict cathedral on the outskirts of town. The place, once a beacon of hope and",
                 "faith, now lies in decay, shrouded in whispers of the unholy. Locals speak of \"Gabriel's Veil,\" an urban",
                 "legend claiming that the Archangel Gabriel, once a messenger of light, had been corrupted. The",
-                "entity now masquerades as an angel to deceive and ensnare the faithful."
+                "entity now masquerades as an angel to deceive and ensnare the faithful.",
             };
 
             string[] intro2 =
@@ -269,7 +287,7 @@ namespace MazeGame
                 "detail a horrifying account of a priest who uncovered Gabriel's true nature. The entity, he claimed,",
                 "had created statues of itself, scattered within labyrinths it conjured in the realm between life and",
                 "death. These statues serve as conduits of its influence, strengthening its dominion over the mortal",
-                "world. The priest believed that finding and destroying these statues was the only way to weaken the false angel's grasp."
+                "world. The priest believed that finding and destroying these statues was the only way to weaken the false angel's grasp.",
             };
 
             string[] intro3 =
@@ -279,13 +297,13 @@ namespace MazeGame
                 "Determined to uncover the truth and end the disappearances, you decide to enter the maze, armed",
                 "with nothing but your wits and the journal’s cryptic guidance. The maze is a place of shifting",
                 "shadows, echoing whispers, and oppressive darkness. Each statue you find brings a sense of hope",
-                "but also heightens Gabriel’s wrath. The closer you get to destroying its power, the more terrifying and relentless it becomes."
+                "but also heightens Gabriel’s wrath. The closer you get to destroying its power, the more terrifying and relentless it becomes.",
             };
             string[] intro4 =
             {
                 "You must act quickly, for every moment spent in the maze strengthens Gabriel’s influence.",
                 "Should you fail, you risk not only your life but your very soul, doomed to wander the labyrinth forever,",
-                "another victim in Gabriel's collection. Will you prevail, or will the false angel claim yet another believer?"
+                "another victim in Gabriel's collection. Will you prevail, or will the false angel claim yet another believer?",
             };
             introSound = new Player();
             introSound.Play("./Files/introLore.wav");
@@ -312,65 +330,72 @@ namespace MazeGame
             // if adding a level, make sure to add a respective sprite here
             string[] levelTwo =
             [
-                    "      ┏┓             ┓   •             ",
-                    "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
-                    "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
-                    "             ┛                         ",
-                    "┏┓          ┓•           ┓       ┓  ┏┓ ",
-                    "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃  ┏┛ ",
-                    "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗━ ",
-                    "                 ┛                     ",
+                "      ┏┓             ┓   •             ",
+                "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
+                "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
+                "             ┛                         ",
+                "┏┓          ┓•           ┓       ┓  ┏┓ ",
+                "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃  ┏┛ ",
+                "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗━ ",
+                "                 ┛                     ",
             ];
             string[] levelThree =
             [
-                    "      ┏┓             ┓   •             ",
-                    "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
-                    "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
-                    "             ┛                         ",
-                    "┏┓          ┓•           ┓       ┓  ┏┓ ",
-                    "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃   ┫ ",
-                    "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗┛ ",
-                    "                 ┛                     ",
+                "      ┏┓             ┓   •             ",
+                "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
+                "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
+                "             ┛                         ",
+                "┏┓          ┓•           ┓       ┓  ┏┓ ",
+                "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃   ┫ ",
+                "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗┛ ",
+                "                 ┛                     ",
             ];
             string[] levelFour =
             [
-                    "      ┏┓             ┓   •             ",
-                    "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
-                    "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
-                    "             ┛                         ",
-                    "┏┓          ┓•           ┓       ┓  ┏┓ ",
-                    "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃  ┃┃ ",
-                    "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗╋ ",
-                    "                 ┛                     ",
-
+                "      ┏┓             ┓   •             ",
+                "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
+                "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
+                "             ┛                         ",
+                "┏┓          ┓•           ┓       ┓  ┏┓ ",
+                "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃  ┃┃ ",
+                "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗╋ ",
+                "                 ┛                     ",
             ];
             string[] levelFive =
             [
-                    "      ┏┓             ┓   •             ",
-                    "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
-                    "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
-                    "             ┛                         ",
-
-                    "┏┓          ┓•           ┓       ┓  ┏━ ",
-                    "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃  ┗┓ ",
-                    "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗┛ ",
-                    "                 ┛                     ",
+                "      ┏┓             ┓   •             ",
+                "      ┃ ┏┓┏┓┏┓┏┓┏┓╋┓┏┃┏┓╋┓┏┓┏┓┏        ",
+                "      ┗┛┗┛┛┗┗┫┛ ┗┻┗┗┻┗┗┻┗┗┗┛┛┗┛        ",
+                "             ┛                         ",
+                "┏┓          ┓•           ┓       ┓  ┏━ ",
+                "┃┃┏┓┏┓┏┏┓┏┓┏┫┓┏┓┏┓  ╋┏┓  ┃ ┏┓┓┏┏┓┃  ┗┓ ",
+                "┣┛┛ ┗┛┗┗ ┗ ┗┻┗┛┗┗┫  ┗┗┛  ┗┛┗ ┗┛┗ ┗  ┗┛ ",
+                "                 ┛                     ",
             ];
             // string[] levelN = [ -- your sprite here -- ];
-            string[] notALevel = [ "error:",
-                                   "missing title"];
+            string[] notALevel = ["error:", "missing title"];
 
             Console.Clear();
             string[] writeStr = [];
             switch (currentLevel)
             {
-                case 2: writeStr = levelTwo; break;
-                case 3: writeStr = levelThree; break;
-                case 4: writeStr = levelFour; break;
-                case 5: writeStr = levelFive; break;
+                case 2:
+                    writeStr = levelTwo;
+                    break;
+                case 3:
+                    writeStr = levelThree;
+                    break;
+                case 4:
+                    writeStr = levelFour;
+                    break;
+                case 5:
+                    writeStr = levelFive;
+                    break;
                 // case n: writeStr = levelN; break;
 
-                default: writeStr = notALevel; break;
+                default:
+                    writeStr = notALevel;
+                    break;
             }
             CWriteFunc.RenderCenteredStrings(writeStr);
             Thread.Sleep(2000);
@@ -383,15 +408,12 @@ namespace MazeGame
             Console.ForegroundColor = ConsoleColor.DarkRed;
             string[] congrats =
             {
-
-" ██████╗ ██████╗ ███╗   ██╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗      █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗██╗",
-"██╔════╝██╔═══██╗████╗  ██║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║     ██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝██║",
-"██║     ██║   ██║██╔██╗ ██║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗██║",
-"██║     ██║   ██║██║╚██╗██║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║╚═╝",
-"╚██████╗╚██████╔╝██║ ╚████║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝███████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║██╗",
-" ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝",
-
-
+                " ██████╗ ██████╗ ███╗   ██╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗      █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗██╗",
+                "██╔════╝██╔═══██╗████╗  ██║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║     ██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝██║",
+                "██║     ██║   ██║██╔██╗ ██║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗██║",
+                "██║     ██║   ██║██║╚██╗██║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║╚═╝",
+                "╚██████╗╚██████╔╝██║ ╚████║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝███████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║██╗",
+                " ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝",
             };
             CWriteFunc.RenderCenteredStrings(congrats);
 
@@ -422,7 +444,6 @@ namespace MazeGame
             bgPlayer.Play("./Files/HomeMenubg.wav");
 
             Console.ReadKey();
-
         }
 
         internal static void GameOver()
@@ -457,7 +478,6 @@ namespace MazeGame
 
             string[] gameOver =
             {
-
                 " ░▒▓██████▓▒░  ░▒▓██████▓▒░ ░▒▓██████████████▓▒░ ░▒▓████████▓▒░ ",
                 "░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░        ",
                 "░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░        ",
@@ -474,7 +494,6 @@ namespace MazeGame
                 "░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▓█▓▒░  ░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░        ",
                 "░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▓█▓▒░  ░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░        ",
                 " ░▒▓██████▓▒░    ░▒▓██▓▒░   ░▒▓████████▓▒░░▒▓█▓▒░░▒▓█▓▒░        ",
-
             };
 
             string[] menuReturn =
@@ -524,14 +543,12 @@ namespace MazeGame
                 "┓       ┓  ┓",
                 "┃ ┏┓┓┏┏┓┃  ┃",
                 "┗┛┗ ┗┛┗ ┗  ┻",
-
                 "┏┓         ┓",
                 "  ┃ ┏┓┏┓╋┏┓┏┓┃┏•",
                 "  ┗┛┗┛┛┗┗┛ ┗┛┗┛•",
-
                 "┳┳┏┓┏┓  ┓ ┏ ┏┓ ┏┓ ┳┓  ┏┳┓   ┳┳┓      ",
                 "┃┃┗┓┣   ┃┃┃ ┣┫ ┗┓ ┃┃   ┃┏┓  ┃┃┃┏┓┓┏┏┓",
-                "┗┛┗┛┗┛  ┗┻┛╻┛┗╻┗┛╻┻┛   ┻┗┛  ┛ ┗┗┛┗┛┗ "
+                "┗┛┗┛┗┛  ┗┻┛╻┛┗╻┗┛╻┻┛   ┻┗┛  ┛ ┗┗┛┗┛┗ ",
             ];
             Console.Clear();
             gameIntroLore();
@@ -543,11 +560,11 @@ namespace MazeGame
             Thread.Sleep(3000);
 
             string[] pressStart =
-              [
-                    "┏┓        ┏┓     ┓ •     ┏┳┓   ┏┓      ",
-                    "┃┃┏┓┏┓┏┏  ┣┫┏┓┓┏╋┣┓┓┏┓┏┓  ┃┏┓  ┗┓╋┏┓┏┓╋",
-                    "┣┛┛ ┗ ┛┛  ┛┗┛┗┗┫┗┛┗┗┛┗┗┫  ┻┗┛  ┗┛┗┗┻┛ ┗",
-              ];
+            [
+                "┏┓        ┏┓     ┓ •     ┏┳┓   ┏┓      ",
+                "┃┃┏┓┏┓┏┏  ┣┫┏┓┓┏╋┣┓┓┏┓┏┓  ┃┏┓  ┗┓╋┏┓┏┓╋",
+                "┣┛┛ ┗ ┛┛  ┛┗┛┗┗┫┗┛┗┗┛┗┗┫  ┻┗┛  ┗┛┗┗┻┛ ┗",
+            ];
             Console.Clear();
             CWriteFunc.RenderCenteredStrings(pressStart);
             // wait for user input to start
