@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/03cfe9be-5c34-4da7-9dbe-f4fe91cf7e01
 ## About
 **GHOST in the POWERSHELL** is a 3D Maze Command-Line Game made possible with the ray casting tech inspired from classic games like *[Wolfenstein](https://en.wikipedia.org/wiki/Wolfenstein_3D#Development)* and *[DOOM](https://en.wikipedia.org/wiki/Doom_(1993_video_game))*.
 
-find the statue in each 3 levels to finish the game. Do it before the timer however, because if your time is out, its game over! 👻
+find the statue in each 5 levels to finish the game. Do it before the timer however, because if your time is out, its game over! 👻
 
 ## Documentation
 - documentation is available at `docs/`.
