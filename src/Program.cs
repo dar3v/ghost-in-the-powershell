@@ -42,7 +42,7 @@ namespace Ghost_in_The_PowerShell
 
             Clear();
 
-            gamestartLoading();
+            GameStartLoading();
             CWriteFunc.FallingBloodTransition(fallingSpeedMilliseconds);
 
             bgPlayer = new Player();
@@ -303,7 +303,7 @@ namespace Ghost_in_The_PowerShell
             }
         }
 
-        static void gamestartLoading()
+        static void GameStartLoading()
         {
             ConsoleColor[] colors = new ConsoleColor[]
             {
