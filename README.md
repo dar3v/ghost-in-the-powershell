@@ -1,6 +1,6 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
 
-![](./docs/ghostpowershell_trailer.mp4)
+[![trailer](https://raw.githubusercontent.com/dar3v/ghost-in-the-powershell/main/docs/thumbnail.png)](https://raw.githubusercontent.com/dar3v/ghost-in-the-powershell/main/docs/ghostpowershell_trailer.mp4)
 *video by: John Wayne Capistrano* 
 
 # Table of Contents
