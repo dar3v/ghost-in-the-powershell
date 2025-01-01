@@ -498,12 +498,14 @@ namespace MazeGame
             gameOverSound.Play("./Files/GameOver.wav");
             Thread.Sleep(5000);
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             CWriteFunc.RenderCenteredStrings(gameOver);
             // Pause for 3 seconds before exiting
 
             Thread.Sleep(5000);
             Console.Clear();
             CWriteFunc.RenderCenteredStrings(menuReturn);
+            Console.ResetColor();
             Console.ReadKey();
 
             int width = Console.WindowWidth;

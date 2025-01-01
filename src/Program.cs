@@ -144,6 +144,20 @@ namespace Ghost_in_The_PowerShell
                 "=== Main Menu ===\n"
             };
 
+            if (consoleWidth < 125 || consoleHeight < 40)
+                {
+                    Console.Clear();
+                    Console.SetCursorPosition(0, 0);
+                    string[] sizeNotEnough = 
+                    {
+                    "Console Size Not Large Enough.",
+                    "Minimum size: 125x40",
+                    $"Current size: {consoleWidth}x{consoleHeight}"
+                    };
+                    CWriteFunc.RenderCenteredStrings(sizeNotEnough);
+                    return; // Exit the method early if size is insufficient
+                }
+
             // Render the instructions with some vertical offset
             for (int i = 0; i < instructs.Length; i++)
             {
