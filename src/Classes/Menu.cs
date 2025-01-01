@@ -7,54 +7,6 @@ namespace WriteFunc
 {
     internal class CWriteFunc
     {
-        // public static void FallingBloodTransition(int width, int height, float fallingSpeedMilliseconds)
-        // {
-        //     Random random = new Random();
-        //     Console.Clear();
-        //     Console.CursorVisible = false; // Hide the cursor for a cleaner effect
-
-        //     // Create an array to track where blood has "landed" for each column
-        //     int[] bloodHeight = new int[width];
-
-        //     // Initialize the stopwatch to measure time
-        //     Stopwatch stopwatch = new Stopwatch();
-        //     stopwatch.Start();
-
-        //     while (true)
-        //     {
-        //         // Only update once the specified time has passed
-        //         if (stopwatch.ElapsedMilliseconds >= fallingSpeedMilliseconds)
-        //         {
-        //             // Randomly select a column for the falling blood
-        //             int col = random.Next(width);
-
-        //             // If the column hasn't reached the bottom, let the blood "fall"
-        //             if (bloodHeight[col] < height)
-        //             {
-        //                 Console.SetCursorPosition(col, bloodHeight[col]);
-        //                 Console.ForegroundColor = ConsoleColor.Red;
-        //                 Console.Write("█");
-
-        //                 // Increment the height for this column
-        //                 bloodHeight[col]++;
-        //             }
-
-        //             // Reset the stopwatch to start measuring for the next update
-        //             stopwatch.Restart();
-        //         }
-
-        //         // Break when all columns are full
-        //         if (Array.TrueForAll(bloodHeight, h => h >= height))
-        //         {
-        //             break;
-        //         }
-        //     }
-
-        //     Console.ResetColor();
-        //     Console.CursorVisible = true; // Restore cursor visibility
-        // }
-
-
         public static void FallingBloodTransition(float fallingSpeedMilliseconds)
         {
             Random random = new Random();
@@ -113,40 +65,6 @@ namespace WriteFunc
 
             Console.ResetColor();
         }
-
-        // public static void FadeEffectAndShowText()
-        // {
-        //     int fadeSteps = 5;  // Number of color transitions
-        //     var fadeColors = new ConsoleColor[]
-        //     {
-        //         ConsoleColor.DarkRed,
-        //         ConsoleColor.Red,
-        //         ConsoleColor.DarkGray,
-        //         ConsoleColor.Gray,
-
-        //     };
-
-        //     // Iterate through the fade colors
-        //     foreach (var color in fadeColors)
-        //     {
-        //         Console.ForegroundColor = color;
-
-        //         // Simulate the blood fading by overwriting with the new color
-        //         for (int row = 0; row < Console.WindowHeight; row++)
-        //         {
-        //             for (int col = 0; col < Console.WindowWidth; col++)
-        //             {
-        //                 Console.SetCursorPosition(col, row);
-        //                 Console.Write("█");  // Keep overwriting with the new color
-        //             }
-        //         }
-
-        //         System.Threading.Thread.Sleep(200); // Adjust to control fade speed
-        //     }
-
-        //     // Clear screen after fade to black and show text
-
-        // }
         public static void RenderCenteredStringsTyping(string[] titlePrompt, int speed = 40)
         {
             int lastWidth = Console.WindowWidth;
@@ -248,71 +166,7 @@ namespace WriteFunc
             }
         }
 
-        //NOTE: Comment cuz yeh, just made a new centering method that is responsive
-        // public static void CenteredText(string text, ref int currentRow)
-        // { //METHOD FOR CENTERING TEXT (make sure to declare int <variable_name> = Console.WindowHeight;)
-        //   //and also declare a variable "int <name> = <variable_name above> / 2;  you can subtract it to change the height
-        //     {
-        //         int consoleWidth = Console.WindowWidth;
-
-        //         int textLength = text.Length;
-        //         int paddingWidth = (consoleWidth - textLength) / 2;
-
-        //         // Debugging: Print padding and text length to verify
-        //         //Console.WriteLine($"Text Length: {textLength}, Padding: {padding}");
-        //         Console.SetCursorPosition(paddingWidth, currentRow);
-        //         Console.WriteLine(text);
-        //         currentRow++;
-        //     }
-        // }
-
-        // public static void RenderUpperCenteredStrings(string[] titlePrompt)
-        // {
-        //     Console.ForegroundColor = ConsoleColor.DarkRed;
-        //     int lastWidth = Console.WindowWidth;
-        //     int lastHeight = Console.WindowHeight;
-
-        //     while (true)
-        //     {
-        //             int currentWidth = Console.WindowWidth;
-        //             int currentHeight = Console.WindowHeight;
-
-        //             if (currentWidth != lastWidth || currentHeight != lastHeight)
-        //                 {
-        //                     Console.Clear();
-        //                     lastWidth = currentWidth;
-        //                     lastHeight = currentHeight;
-        //                 }
-
-        //         if (currentWidth >= titlePrompt[0].Length && currentHeight >= titlePrompt.Length)
-        //         {
-        //             int verticalOffset = Math.Max(0, (currentHeight / 4) - (titlePrompt.Length / 2));
-        //             StringBuilder render = new();
-        //             render.Append('\n', verticalOffset);
-
-        //             foreach (string line in titlePrompt)
-        //             {
-        //                 int horizontalOffset = Math.Max(0, (currentWidth - line.Length) / 2);
-        //                 render.Append(' ', horizontalOffset).AppendLine(line);
-        //             }
-
-        //             Console.SetCursorPosition(0, 0);
-        //             Console.Write(render);
-        //             break;
-        //         }
-        //         else
-        //         {
-        //             Console.SetCursorPosition(0, 0);
-        //             Console.WriteLine("Console not large enough.");
-        //             Console.WriteLine($"Current size: {currentWidth}x{currentHeight}");
-        //         }
-
-        //         // if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Y)
-        //         // {
-        //         //     Environment.Exit(0);
-        //         // }
-        //     }
-        // }
+        
 
         public static void RenderCenteredStrings(string[] titlePrompt, ConsoleColor[] colors)
         {
@@ -426,5 +280,152 @@ namespace WriteFunc
                 // }
             }
         }
+
+        // public static void FallingBloodTransition(int width, int height, float fallingSpeedMilliseconds)
+        // {
+        //     Random random = new Random();
+        //     Console.Clear();
+        //     Console.CursorVisible = false; // Hide the cursor for a cleaner effect
+
+        //     // Create an array to track where blood has "landed" for each column
+        //     int[] bloodHeight = new int[width];
+
+        //     // Initialize the stopwatch to measure time
+        //     Stopwatch stopwatch = new Stopwatch();
+        //     stopwatch.Start();
+
+        //     while (true)
+        //     {
+        //         // Only update once the specified time has passed
+        //         if (stopwatch.ElapsedMilliseconds >= fallingSpeedMilliseconds)
+        //         {
+        //             // Randomly select a column for the falling blood
+        //             int col = random.Next(width);
+
+        //             // If the column hasn't reached the bottom, let the blood "fall"
+        //             if (bloodHeight[col] < height)
+        //             {
+        //                 Console.SetCursorPosition(col, bloodHeight[col]);
+        //                 Console.ForegroundColor = ConsoleColor.Red;
+        //                 Console.Write("█");
+
+        //                 // Increment the height for this column
+        //                 bloodHeight[col]++;
+        //             }
+
+        //             // Reset the stopwatch to start measuring for the next update
+        //             stopwatch.Restart();
+        //         }
+
+        //         // Break when all columns are full
+        //         if (Array.TrueForAll(bloodHeight, h => h >= height))
+        //         {
+        //             break;
+        //         }
+        //     }
+
+        //     Console.ResetColor();
+        //     Console.CursorVisible = true; // Restore cursor visibility
+        // }
+
+        //NOTE: Comment cuz yeh, just made a new centering method that is responsive
+        // public static void CenteredText(string text, ref int currentRow)
+        // { //METHOD FOR CENTERING TEXT (make sure to declare int <variable_name> = Console.WindowHeight;)
+        //   //and also declare a variable "int <name> = <variable_name above> / 2;  you can subtract it to change the height
+        //     {
+        //         int consoleWidth = Console.WindowWidth;
+
+        //         int textLength = text.Length;
+        //         int paddingWidth = (consoleWidth - textLength) / 2;
+
+        //         // Debugging: Print padding and text length to verify
+        //         //Console.WriteLine($"Text Length: {textLength}, Padding: {padding}");
+        //         Console.SetCursorPosition(paddingWidth, currentRow);
+        //         Console.WriteLine(text);
+        //         currentRow++;
+        //     }
+        // }
+
+        // public static void RenderUpperCenteredStrings(string[] titlePrompt)
+        // {
+        //     Console.ForegroundColor = ConsoleColor.DarkRed;
+        //     int lastWidth = Console.WindowWidth;
+        //     int lastHeight = Console.WindowHeight;
+
+        //     while (true)
+        //     {
+        //             int currentWidth = Console.WindowWidth;
+        //             int currentHeight = Console.WindowHeight;
+
+        //             if (currentWidth != lastWidth || currentHeight != lastHeight)
+        //                 {
+        //                     Console.Clear();
+        //                     lastWidth = currentWidth;
+        //                     lastHeight = currentHeight;
+        //                 }
+
+        //         if (currentWidth >= titlePrompt[0].Length && currentHeight >= titlePrompt.Length)
+        //         {
+        //             int verticalOffset = Math.Max(0, (currentHeight / 4) - (titlePrompt.Length / 2));
+        //             StringBuilder render = new();
+        //             render.Append('\n', verticalOffset);
+
+        //             foreach (string line in titlePrompt)
+        //             {
+        //                 int horizontalOffset = Math.Max(0, (currentWidth - line.Length) / 2);
+        //                 render.Append(' ', horizontalOffset).AppendLine(line);
+        //             }
+
+        //             Console.SetCursorPosition(0, 0);
+        //             Console.Write(render);
+        //             break;
+        //         }
+        //         else
+        //         {
+        //             Console.SetCursorPosition(0, 0);
+        //             Console.WriteLine("Console not large enough.");
+        //             Console.WriteLine($"Current size: {currentWidth}x{currentHeight}");
+        //         }
+
+        //         // if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Y)
+        //         // {
+        //         //     Environment.Exit(0);
+        //         // }
+        //     }
+        // }
+
+        // public static void FadeEffectAndShowText()
+        // {
+        //     int fadeSteps = 5;  // Number of color transitions
+        //     var fadeColors = new ConsoleColor[]
+        //     {
+        //         ConsoleColor.DarkRed,
+        //         ConsoleColor.Red,
+        //         ConsoleColor.DarkGray,
+        //         ConsoleColor.Gray,
+
+        //     };
+
+        //     // Iterate through the fade colors
+        //     foreach (var color in fadeColors)
+        //     {
+        //         Console.ForegroundColor = color;
+
+        //         // Simulate the blood fading by overwriting with the new color
+        //         for (int row = 0; row < Console.WindowHeight; row++)
+        //         {
+        //             for (int col = 0; col < Console.WindowWidth; col++)
+        //             {
+        //                 Console.SetCursorPosition(col, row);
+        //                 Console.Write("█");  // Keep overwriting with the new color
+        //             }
+        //         }
+
+        //         System.Threading.Thread.Sleep(200); // Adjust to control fade speed
+        //     }
+
+        //     // Clear screen after fade to black and show text
+
+        // }
     }
 }
