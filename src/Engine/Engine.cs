@@ -613,7 +613,7 @@ namespace RaycasterCS
                     int nStatueCountAll = foundStatues.Length;
 
                     string stats =
-                     $"👻 statues: {nStatueCount}/{nStatueCountAll}\t time: {nTimeLeft:F2}s 👻";
+                     $"👻 Statues: {nStatueCount}/{nStatueCountAll}\t Time: {nTimeLeft:F2}s 👻";
 
                     // center
                     int center = (nConsoleWidth - stats.Length) / 2;
@@ -646,13 +646,17 @@ namespace RaycasterCS
                     // check if console size is large enough
                     if (!bConsoleLargeEnough)
                     {
-                        Console.SetCursorPosition(0, 0);
-                        Console.WriteLine("Console not large enough.");
-                        Console.WriteLine($"Current size: {nConsoleWidth}x{nConsoleHeight}");
-                        Console.WriteLine($"Minimum size: {nScreenWidth}x{nScreenHeight}");
+                        string[] sizeNotEnough = 
+                    {
+                    "Console Size Not Large Enough.",
+                    "Minimum size: 125x40",
+                    $"Current size: {nConsoleWidth}x{nConsoleHeight}"
+                    };
+                    CWriteFunc.RenderCenteredStrings(sizeNotEnough);
                     }
                     else break;
                 }
+
             }
         }
 

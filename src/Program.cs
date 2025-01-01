@@ -238,7 +238,7 @@ namespace Ghost_in_The_PowerShell
             Maze.GameStart();
 
             if (bgPlayer != null) bgPlayer.Play("./Files/HomeMenubg.wav");
-            RunHomeMenu();
+            // RunHomeMenu();
         }
 
         private static void G_aboutGame()
