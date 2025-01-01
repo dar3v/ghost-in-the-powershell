@@ -1,35 +1,14 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
 
-<!-- TODO: Add and embed overview video or GIF here-->
-```
-
-                                                                                
-                                                                       ██████  █
-                                                                █████████████  █
-                                                           ██████████████████  █
-                                                     ████  ██████████████████  █
-                                                 ████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                             ████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                             ████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ............................████████  ██████████████████  █
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ............................████████  ██████████████████  █
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx████████  ██████████████████  █
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx████  ██████████████████  █
-###########################################################██████████████████  █
-################################################################█████████████  █
-```
+![](./docs/ghostpowershell_trailer.mp4)
+*video by: John Wayne Capistrano* 
 
 # Table of Contents
 - [About](#about)
 - [Documentation](#documentation)
 - [Installation](#installation)
 - [Credits](#credits-)
+- [Developers](#developers)
 
 ## About
 **GHOST in the POWERSHELL** is a 3D Maze Command-Line Game made possible with the ray casting tech inspired from classic games like *[Wolfenstein](https://en.wikipedia.org/wiki/Wolfenstein_3D#Development)* and *[DOOM](https://en.wikipedia.org/wiki/Doom_(1993_video_game))*.
@@ -123,3 +102,8 @@ its not like I have any plans to maintain this project, but if for any reason yo
 - [javidx9](https://www.youtube.com/@javidx9) for his youtube video tutorial on the ray caster inspired from *Wolfenstein* in the commandline, originally written in C++
     -  [video link](https://www.youtube.com/watch?v=xW8skO7MFYw)
 - [NetCoreAudio](https://github.com/mobiletechtracker/NetCoreAudio) for the cross-platform audio library
+
+## Developers
+- Dan Rev Paco ([@dar3v](https://github.com/dar3v))
+- Ezekiel Viray ([@Zeki](https://github.com/Zeki-Zek))
+- John Wayne Capistrano ([@Saito2720](https://github.com/Saito2720))
