@@ -1,7 +1,11 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
 
-[![trailer](https://raw.githubusercontent.com/dar3v/ghost-in-the-powershell/main/docs/thumbnail.png)](https://raw.githubusercontent.com/dar3v/ghost-in-the-powershell/main/docs/ghostpowershell_trailer.mp4)
-*video by: John Wayne Capistrano* 
+*Trailer Video by: John Wayne Capistrano* 
+
+
+https://github.com/user-attachments/assets/03cfe9be-5c34-4da7-9dbe-f4fe91cf7e01
+
+
 
 # Table of Contents
 - [About](#about)
