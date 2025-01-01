@@ -1,11 +1,8 @@
 <h1 align=center>GHOST in the POWERSHELL</h1>
 
-*Trailer Video by: John Wayne Capistrano* 
-
-
 https://github.com/user-attachments/assets/03cfe9be-5c34-4da7-9dbe-f4fe91cf7e01
 
-
+*Trailer Video by: John Wayne Capistrano* 
 
 # Table of Contents
 - [About](#about)
