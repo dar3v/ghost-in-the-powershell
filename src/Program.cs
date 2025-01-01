@@ -44,7 +44,7 @@ namespace Ghost_in_The_PowerShell
             Clear();
 
             gamestartLoading();
-            CWriteFunc.FallingBloodTransition(width, height, fallingSpeedMilliseconds);
+            CWriteFunc.FallingBloodTransition(fallingSpeedMilliseconds);
 
             bgPlayer = new Player();
             bgPlayer.Play("./Files/HomeMenubg.wav");
@@ -139,10 +139,10 @@ namespace Ghost_in_The_PowerShell
             // Instructions to be displayed
             string[] instructs =
             {
-        "Use Up/Down arrows to navigate and Enter to select.\n",
-        "\n",
-        "=== Main Menu ===\n"
-    };
+                "Use Up/Down arrows to navigate and Enter to select.\n",
+                "\n",
+                "=== Main Menu ===\n"
+            };
 
             // Render the instructions with some vertical offset
             for (int i = 0; i < instructs.Length; i++)
@@ -218,7 +218,7 @@ namespace Ghost_in_The_PowerShell
             float fallingSpeedMilliseconds = 0.00f; // Adjust to control the speed
             if (bgPlayer != null) bgPlayer.Stop();
             ScaryMaze Maze = new();
-            CWriteFunc.FallingBloodTransition(width, height, fallingSpeedMilliseconds);
+            CWriteFunc.FallingBloodTransition(fallingSpeedMilliseconds);
 
             Console.Clear();
             Maze.GameStart();

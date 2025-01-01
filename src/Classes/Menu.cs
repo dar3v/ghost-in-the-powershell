@@ -55,51 +55,65 @@ namespace WriteFunc
         // }
 
 
-        public static void FallingBloodTransition(int width, int height, float fallingSpeedMilliseconds)
+        public static void FallingBloodTransition(float fallingSpeedMilliseconds)
+{
+    Random random = new Random();
+    Console.CursorVisible = false; // Hide the cursor for a cleaner effect
+
+    // Dynamically get the current console dimensions
+    int width = Console.WindowWidth;
+    int height = Console.WindowHeight;
+
+    // Create an array to track where blood has "landed" for each column
+    int[] bloodHeight = new int[width];
+
+    // Initialize the stopwatch to measure time
+    Stopwatch stopwatch = new Stopwatch();
+    stopwatch.Start();
+
+    while (true)
     {
-        Random random = new Random();
-        // Console.Clear();  // Clear the console once at the beginning
-        Console.CursorVisible = false; // Hide the cursor for a cleaner effect
+        // Dynamically update the console dimensions in case of resizing
+        width = Console.WindowWidth;
+        height = Console.WindowHeight;
 
-        // Create an array to track where blood has "landed" for each column
-        int[] bloodHeight = new int[width];
-
-        // Initialize the stopwatch to measure time
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-
-        while (true)
+        // Adjust the bloodHeight array if the console width changes
+        if (bloodHeight.Length != width)
         {
-            // Only update once the specified time has passed
-            if (stopwatch.ElapsedMilliseconds >= fallingSpeedMilliseconds)
-            {
-                // Randomly select a column for the falling blood
-                int col = random.Next(width);
-
-                // If the column hasn't reached the bottom, let the blood "fall"
-                if (bloodHeight[col] < height)
-                {
-                    Console.SetCursorPosition(col, bloodHeight[col]);
-                    Console.ForegroundColor = ConsoleColor.DarkRed; // Initial color of blood
-                    Console.Write("█");
-
-                    // Increment the height for this column
-                    bloodHeight[col]++;
-                }
-
-                // Reset the stopwatch to start measuring for the next update
-                stopwatch.Restart();
-            }
-
-            // Break when all columns are full
-            if (Array.TrueForAll(bloodHeight, h => h >= height))
-            {
-                break;
-            }
+            Array.Resize(ref bloodHeight, width);
         }
 
-        Console.ResetColor();
+        // Only update once the specified time has passed
+        if (stopwatch.ElapsedMilliseconds >= fallingSpeedMilliseconds)
+        {
+            // Randomly select a column for the falling blood
+            int col = random.Next(width);
+
+            // If the column hasn't reached the bottom, let the blood "fall"
+            if (bloodHeight[col] < height)
+            {
+                Console.SetCursorPosition(col, bloodHeight[col]);
+                Console.ForegroundColor = ConsoleColor.DarkRed; // Initial color of blood
+                Console.Write("█");
+
+                // Increment the height for this column
+                bloodHeight[col]++;
+            }
+
+            // Reset the stopwatch to start measuring for the next update
+            stopwatch.Restart();
+        }
+
+        // Break when all columns are full
+        if (Array.TrueForAll(bloodHeight, h => h >= height))
+        {
+            break;
+        }
     }
+
+    Console.ResetColor();
+}
+
 
     // public static void FadeEffectAndShowText()
     // {

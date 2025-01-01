@@ -510,7 +510,7 @@ namespace MazeGame
             int height = Console.WindowHeight;
             float fallingSpeedMilliseconds = 0.10f;
 
-            CWriteFunc.FallingBloodTransition(width, height, fallingSpeedMilliseconds);
+            CWriteFunc.FallingBloodTransition(fallingSpeedMilliseconds);
             bgPlayer = new Player();
             bgPlayer.Play("./Files/HomeMenubg.wav");
         }
@@ -553,7 +553,7 @@ namespace MazeGame
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
             float fallingSpeedMilliseconds = 0.000f;
-            CWriteFunc.FallingBloodTransition(width, height, fallingSpeedMilliseconds);
+            CWriteFunc.FallingBloodTransition(fallingSpeedMilliseconds);
             StopIntroMusic();
         }
     }

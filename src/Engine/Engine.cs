@@ -217,6 +217,7 @@ namespace RaycasterCS
                                 case 6: selectedSound += "StatueVoice7.wav"; break;
                                 case 7: selectedSound += "StatueVoice8.wav"; break;
                                 case 8: selectedSound += "StatueVoice9.wav"; break;
+                                case 9: selectedSound += "StatueVoice10.wav"; break;
                             }
                             statueFound.Play(selectedSound);
                         }
