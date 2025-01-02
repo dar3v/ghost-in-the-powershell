@@ -51,6 +51,7 @@ $ cd src/
 - or, running the program through your IDE should also work. Just make sure you're in the `src/` path.
 
 **Video Guide**
+
 https://github.com/user-attachments/assets/5788ca9d-2b4d-4376-b118-65da82737168
 
  ## precompiled binaries
